@@ -38,5 +38,21 @@ class DatabaseSeeder extends Seeder
             'profilePicture' => 'student-2.jpeg',
             'score' => 95.0
         ]);
+
+        DB::table('courses')->insert([
+            'name' => 'Mathematics',
+            'teacher' => 'Frank Li',
+            'day' => 'Monday',
+            'time' => '07:00:00',
+            'class' => 'B'
+        ]);
+
+        DB::table('courses')->insert([
+            'name' => 'Physics',
+            'teacher' => 'Yovanka Lip',
+            'day' => 'Tuesday',
+            'time' => '08:00:00',
+            'class' => 'C'
+        ]);
     }
 }
