@@ -15,6 +15,7 @@ class Student extends Model implements Authenticatable
     protected $fillable=[
         'name',
         'email',
+        'password',
         'class',
         'dateOfBirth',
         'profilePicture'
