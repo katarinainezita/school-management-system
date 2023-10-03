@@ -8,6 +8,6 @@
 | 2    | Katarina Inezita Prambudi         | 5025211148   |
 
 ## Result
-<img width="1274" alt="image" src="https://github.com/vronnn/Modul2_Probstat_5025211142/assets/105977864/cd9eb280-7143-4d40-bef8-d18ecfbcf33a">
+<img width="1274" alt="image" src="https://github.com/katarinainezita/school-management-system/assets/109232320/a13db56d-229b-4cf0-9281-c995f419c5ab">
 
 
