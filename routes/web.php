@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('student/dashboard', function () {
-    return view('student.dashboard');
-});
+Route::post('/login', [LoginController::class, 'authenticate']);
+
+Route::get('student/dashboard', [DashboardController::class, 'showProfile']);
+Route::post('student/dashboard/edit', [DashboardController::class, 'updateProfile']);

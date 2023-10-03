@@ -179,10 +179,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('storage/img/'.$student->profilePicture) }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ $student->name }}</a>
         </div>
       </div>
 
@@ -230,38 +230,56 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
-                    <form method="post" action="">
-                        {{ csrf_field() }}
+                    <form action="/student/dashboard/edit" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" value="" name="name" required placeholder="Name">
+                                <input type="text" class="form-control" value="{{ $student->name }} " name="name" required placeholder="Name">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" value="" name="email" required placeholder="Email">
+                                <input type="email" class="form-control" value="{{ $student->email }}" name="email" required placeholder="Email">
                             </div>
                             <div class="form-group">
                                 <label>Class</label>
-                                <select class="form-control" required name="class_id">
+                                <h6>{{ $student->class }}</h6>
+                                <!-- <select class="form-control" required name="class_id">
+                                    @if($student->class=='A')
+                                    <option value="" selected>A</option>
+                                    @else
                                     <option value="">A</option>
+                                    @endif
+
+                                    @if($student->class=='B')
+                                    <option value="" selected>B</option>
+                                    @else
                                     <option value="">B</option>
+                                    @endif
+
+                                    @if($student->class=='C')
+                                    <option value="" selected>C</option>
+                                    @else
                                     <option value="">C</option>
-                                </select>
+                                    @endif
+                                </select> -->
                             </div>
                             <div class="form-group">
                                 <label>Date of Birth</label>
-                                <input type="date" class="form-control" value="" name="date_of_birth" required>
+                                <input type="date" class="form-control" value="{{ $student->dateOfBirth }}" name="dateOfBirth" required>
                             </div>
                             <div class="form-group">
                                 <label>Profile Pic</label>
-                                {{-- <input type="file" class="form-control" value="" name="profile_pic" > --}}
-                                <img src="../../dist/img/avatar.png" alt="" style="max-width: 100%; max-height: 100%;display: block; margin: 0 auto;">
+                                <img src="{{ asset('storage/img/'.$student->profilePicture) }}" alt="" style="width: 100px;display: block; margin: 0 auto;">
+                                <input type="file" class="form-control" value="" name="profilePicture" >
                             </div>
                             <div class="form-group">
                                 <label>Score</label>
-                                <input type="number" class="form-control" value="" name="score" required placeholder="score" min="0" max="100">
+                                <h6>{{ $student->score }}</h6>
+                                <!-- <input type="number" class="form-control" value="{{ $student->score }}" name="score" required placeholder="score" min="0" max="100"> -->
                             </div>
+
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
