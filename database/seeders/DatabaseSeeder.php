@@ -61,5 +61,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'katarinainezita03@gmail.com',
             'password' => 'inez12345'
         ]);
+
+        DB::table('course_student')->insert([
+            'course_id' => 1,
+            'student_id' => 1
+        ]);
     }
 }

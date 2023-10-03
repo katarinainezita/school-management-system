@@ -20,4 +20,8 @@ class Student extends Model implements Authenticatable
         'dateOfBirth',
         'profilePicture'
     ];
+
+    public function courses(){
+        return $this->belongsToMany(Course::class);
+    }
 }

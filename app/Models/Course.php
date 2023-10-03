@@ -16,4 +16,8 @@ class Course extends Model
         'time',
         'class'
     ];
+
+    public function students(){
+        return $this->belongsToMany(Student::class);
+    }
 }
