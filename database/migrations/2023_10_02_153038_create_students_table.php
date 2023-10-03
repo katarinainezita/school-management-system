@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('class');
             $table->date('dateOfBirth');
             $table->string('profilePicture');
-            $table->float('score');
+            $table->float('score')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
