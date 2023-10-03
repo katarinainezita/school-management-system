@@ -54,5 +54,11 @@ class DatabaseSeeder extends Seeder
             'time' => '08:00:00',
             'class' => 'C'
         ]);
+
+        DB::table('admins')->insert([
+            'name' => 'Katarina Inezita',
+            'email' => 'katarinainezita03@gmail.com',
+            'password' => 'inez12345'
+        ]);
     }
 }
