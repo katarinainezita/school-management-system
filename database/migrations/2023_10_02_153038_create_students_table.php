@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('score')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
         });
     }
 
