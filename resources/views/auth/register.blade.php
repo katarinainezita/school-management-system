@@ -16,6 +16,27 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Class -->
+        <div>
+            <x-input-label for="class" :value="__('Class')" />
+            <x-text-input id="class" class="block mt-1 w-full" type="text" name="class" :value="old('class')" required autofocus autocomplete="class" />
+            <x-input-error :messages="$errors->get('class')" class="mt-2" />
+        </div>
+
+        <!-- Date of Birth -->
+        <div>
+            <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
+            <x-text-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" :value="old('date_of_birth')" required autofocus autocomplete="bdate" />
+            <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
+        </div>
+
+        <!-- Profile Picture -->
+        <div>
+            <x-input-label for="profile_picture" :value="__('Profile Picture')" />
+            <input id="profile_picture" type="file" class="block mt-1 w-full" name="profile_picture" accept="image/*" :value="old('profile_picture')" required />
+            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
