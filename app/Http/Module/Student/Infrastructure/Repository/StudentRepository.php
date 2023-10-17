@@ -12,10 +12,14 @@ class StudentRepository implements StudentRepositoryInterface
     {
         DB::table('students')->upsert(
             [
-                'nama' => $product->nama,
-                'price' => $product->price,
-                'description' => $product->description,
-            ],'nama'
+                'name' => $student->name,
+                'email' => $student->email,
+                'password' => $student->password,
+                'class' => $student->class,
+                'dateOfBirth' => $student->dateOfBirth,
+                'profilePicture' => $student->profilePicture,
+                'score' => $student->score,
+            ],'name'
         );
     }
 }
