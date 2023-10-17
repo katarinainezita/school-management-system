@@ -32,15 +32,27 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'class' => ['required', 'string', 'max:255'],
+            'date_of_birth' => ['required', 'date'], 
+            'profile_picture' => ['image', 'mimes:jpeg,png,gif', 'max:2048'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'class' => $request->class,
+            'date_of_birth' => $request->date_of_birth,
+            'profile_picture' => $request->profile_picture,
             'password' => Hash::make($request->password),
         ]);
+        
+        // Jika Anda ingin menyimpan gambar profil, Anda perlu mengelola unggahan gambar di sini, misalnya:
+        if ($request->hasFile('profile_picture')) {
+            $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $user->update(['profile_picture' => $imagePath]);
+        }
 
         event(new Registered($user));
 
