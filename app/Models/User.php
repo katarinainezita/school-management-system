@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -42,4 +43,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function role(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role_type == 'App\Models\Admin';
+    }
+
+    public function isStudent(): bool
+    {
+        return $this->role_type == 'App\Models\Student';
+    }
+
+    public function isLecturer(): bool
+    {
+        return $this->role_type == 'App\Models\Lecturer';
+    }
 }
