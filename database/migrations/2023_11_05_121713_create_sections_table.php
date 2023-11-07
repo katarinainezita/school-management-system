@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Module::class);
             $table->text('content');
+            $table->integer('order');
             $table->timestamps();
         });
     }

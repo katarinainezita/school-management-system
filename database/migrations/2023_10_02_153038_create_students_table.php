@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('profilePicture', 200)->nullable();
             $table->date('dateOfBirth');
             $table->string('phoneNumber', 20);
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

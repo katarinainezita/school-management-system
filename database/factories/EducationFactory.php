@@ -17,7 +17,10 @@ class EducationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'level' => fake()->randomElement(["S1", "S2", "S3"]),
+            'institution' => 'Sepuluh Nopember Institute of Technology',
+            'score' => fake()->randomFloat(2, 3, 4),
+            'major' => fake()->randomElement(["Electrical Engineering", "Business", "Informatics", "Economy"]),
         ];
     }
 }

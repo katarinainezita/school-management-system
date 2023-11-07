@@ -14,8 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('course_lecturer', function (Blueprint $table) {
+            $table->id();
             $table->foreignIdFor(Course::class);
             $table->foreignIdFor(Lecturer::class);
+            $table->timestamps();
         });
     }
 

@@ -16,9 +16,11 @@ return new class extends Migration
             $table->integer('owner_id');
             $table->string('owner_type');
             $table->string('institution', 100);
-            $table->string('role', 50);
-            $table->date('start');
-            $table->date('end');
+            $table->string('role', 50)->nullable();
+            $table->integer('month_start');
+            $table->integer('year_start');
+            $table->integer('month_end');
+            $table->integer('year_end');
             $table->timestamps();
         });
     }

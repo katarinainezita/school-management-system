@@ -16,8 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('name', 300);
             $table->string('phoneNumber', 20);
-            $table->string('speciality', 100);
+            $table->string('speciality', 100)->nullable();
             $table->text('description');
+            $table->timestamps();
         });
     }
 

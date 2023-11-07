@@ -17,7 +17,11 @@ class WorkingExperienceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'institution' => fake()->randomElement(['Google', 'Facebook', 'Goto']),
+            'month_start' => fake()->month(),
+            'year_start' => fake()->numberBetween(2010, 2015),
+            'month_end' => fake()->month(),
+            'year_end' => fake()->numberBetween(2016, 2023),
         ];
     }
 }

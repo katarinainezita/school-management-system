@@ -14,8 +14,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('course_student', function (Blueprint $table) {
+            $table->id();
             $table->foreignIdFor(Course::class);
             $table->foreignIdFor(Student::class);
+            $table->boolean('finish')->default(false);
+            $table->integer('score')->nullable();
+            $table->timestamps();
         });
     }
 

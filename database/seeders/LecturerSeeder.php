@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
+use App\Models\Education;
+use App\Models\Lecturer;
+use App\Models\WorkingExperience;
 use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,12 +17,15 @@ class LecturerSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        DB::table("lecturers")->insert([
-            'name' => fake()->name(),
-            'phoneNumber' => fake()->phoneNumber(),
-            'speciality' => 'Machine Learning',
-            'description' => fake()->sentence(),
-        ]);
+        Lecturer::factory()
+                ->count(5)
+                ->has(Education::factory()
+                                ->count(2)
+                                ->sequence(
+                                    ['level' => 'S1'],
+                                    ['level' => 'S2']
+                                ))
+                ->has(WorkingExperience::factory()->count(2))
+                ->create();
     }
 }

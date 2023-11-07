@@ -18,6 +18,9 @@ class LecturerFactory extends Factory
     {
         return [
             //
+            'name' => fake()->name(),
+            'phoneNumber' => fake()->phoneNumber(),
+            'description' => fake()->sentence(),
         ];
     }
 }

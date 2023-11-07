@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
+use App\Models\Education;
+use App\Models\Student;
 use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,10 +17,11 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         //
-        DB::table("students")->insert([
-            'name' => fake()->name(),
-            'dateOfBirth' => fake()->date(),
-            'phoneNumber' => fake()->phoneNumber()
-        ]);
+        Student::factory()
+                ->count(15)
+                ->has(Education::factory()
+                                ->count(1)
+                                ->state(['level' => 'S1']))
+                ->create();
     }
 }

@@ -18,6 +18,7 @@ class SectionFactory extends Factory
     {
         return [
             //
+            'content' => fake()->text(5),
         ];
     }
 }
