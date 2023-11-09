@@ -21,7 +21,7 @@ class CourseFactory extends Factory
             'description' => fake()->paragraph(7),
             'category' => fake()->randomElement(["Machine Learning", "Front End", "Backend", "Android", "IOS", "IoT"]),
             'level' => fake()->randomElement(["Dasar", "Pemula", "Menengah", "Mahir"]),
-            'photo' => 'default.jpeg',
+            'photo' => 'course/default.jpeg',
         ];
     }
 }

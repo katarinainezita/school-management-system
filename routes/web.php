@@ -16,16 +16,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+}) -> name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/student/dashboard', function () {
+//     return view('student.dashboard');
+// })->middleware(['auth', 'verified', 'student'])->name('student.dashboard');
 
-Route::middleware('auth')->group(function () {
+// Route::get('/admin/dashboard', function () {
+//     return view('admin.dashboard');
+// })->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard');
+
+// Route::get('/lecturer/dashboard', function () {
+//     return view('lecturer.dashboard');
+// })->middleware(['auth', 'verified', 'lecturer'])->name('lecturer.dashboard');
+
+Route::middleware(['auth', 'student'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/student.php';
+require __DIR__.'/admin.php';
+require __DIR__.'/lecturer.php';

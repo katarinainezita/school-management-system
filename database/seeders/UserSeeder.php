@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory()
-                ->count(15)
+                ->count(30)
                 ->for(Student::factory(), 'role')
                 ->sequence(
                     ['role_id' => 1],
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
                 ->create();
 
         User::factory()
-                ->count(10)
+                ->count(20)
                 ->for(Lecturer::factory(), 'role')
                 ->sequence(
                     ['role_id' => 1],

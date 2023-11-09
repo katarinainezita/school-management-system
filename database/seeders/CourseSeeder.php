@@ -22,7 +22,7 @@ class CourseSeeder extends Seeder
     {
         //
         Course::factory()
-                ->count(5)
+                ->count(10)
                 ->has(Module::factory()
                                 ->count(3)
                                 ->sequence(
