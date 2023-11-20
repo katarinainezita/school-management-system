@@ -20,4 +20,9 @@ class Module extends Model
     {
         return $this->hasMany(Section::class);
     }
+
+    public function numOfSections(): int
+    {
+        return $this->sections()->count();
+    }
 }
