@@ -33,4 +33,14 @@ class Course extends Model
     {
         return $this->hasMany(Module::class);
     }
+
+    public function numOfModules(): int
+    {
+        return $this->modules()->count();
+    }
+
+    public function numOfSections()
+    {
+        return $this->modules()->with('sections')->get()->flatMap->sections->count();
+    }
 }

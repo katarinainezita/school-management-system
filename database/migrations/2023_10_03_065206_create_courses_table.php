@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('category', 50);
             $table->string('level', 20);
             $table->string('photo', 200);
+            $table->boolean('verified')->default(false);
             $table->timestamps();
         });
     }

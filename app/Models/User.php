@@ -54,13 +54,28 @@ class User extends Authenticatable
         return $this->role_type == 'App\Models\Admin';
     }
 
+    public function isNotAdmin(): bool
+    {
+        return !($this->role_type == 'App\Models\Admin');
+    }
+
     public function isStudent(): bool
     {
         return $this->role_type == 'App\Models\Student';
     }
 
+    public function isNotStudent(): bool
+    {
+        return !($this->role_type == 'App\Models\Student');
+    }
+
     public function isLecturer(): bool
     {
         return $this->role_type == 'App\Models\Lecturer';
+    }
+
+    public function isNotLecturer(): bool
+    {
+        return !($this->role_type == 'App\Models\Lecturer');
     }
 }
