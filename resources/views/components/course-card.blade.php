@@ -17,8 +17,8 @@
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $title }}</h5>
         </a>
         <div class="flex justify-left mb-2">
-            <x-badge bgColor='blue-200' textColor="blue-700" textSize="md" fontWeight="semibold"> {{ $category }} </x-badge>
-            <x-badge bgColor="pink-200" textColor="pink-700" textSize="md" fontWeight="semibold"> {{ $level }} </x-badge>
+            <x-badge bgColor='bg-blue-200' textColor="text-blue-700" textSize="text-md" fontWeight="font-semibold"> {{ $category }} </x-badge>
+            <x-badge bgColor="bg-pink-200" textColor="text-pink-700" textSize="text-md" fontWeight="font-semibold"> {{ $level }} </x-badge>
         </div>
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ Str::limit($description,150) }}</p>
         <div class="flex justify-between">

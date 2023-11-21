@@ -18,7 +18,7 @@ class EnsureUserIsAdmin
     {
         if(! $request->user()->isAdmin())
         {
-            return Redirect::route("home");
+            return Redirect::route("admin.dashboard");
         }
         
         return $next($request);
