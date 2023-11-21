@@ -10,7 +10,7 @@ Route::middleware(['auth', 'verified', 'lecturer'])->group(function () {
 
     Route::get('/lecturer/courses', [LecturerController::class, 'showCourses'])->name('lecturer.courses');
 
-    Route::get('', function () {
+    Route::get('/lecturer/discussions', function () {
         return view('lecturer.dashboard');
     })->name('lecturer.discussions');
 });

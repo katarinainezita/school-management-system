@@ -18,7 +18,7 @@ class EnsureUserIsAdmin
     {
         if(! $request->user()->isAdmin())
         {
-            return Redirect::route("admin.dashboard");
+            abort(443, 'You are not allowed to');
         }
         
         return $next($request);
