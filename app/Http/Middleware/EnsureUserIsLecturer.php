@@ -18,7 +18,7 @@ class EnsureUserIsLecturer
     {
         if(! $request->user()->isLecturer())
         {
-            return Redirect::route("home");
+            return Redirect::route("lecturer.dashboard");
         }
 
         return $next($request);

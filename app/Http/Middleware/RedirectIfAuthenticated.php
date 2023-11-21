@@ -25,11 +25,11 @@ class RedirectIfAuthenticated
                     return redirect(RouteServiceProvider::HOMEAdmin);
                 }
 
-                else if(Auth::user()->isStudent) {
+                else if(Auth::user()->isStudent()) {
                     return redirect(RouteServiceProvider::HOMEStudent);
                 }
 
-                else if(Auth::user()->isLecturer) {
+                else if(Auth::user()->isLecturer()) {
                     return redirect(RouteServiceProvider::HOMELecturer);
                 }
             }
