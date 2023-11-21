@@ -3,5 +3,13 @@
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 
-Route::patch("/course/verify", [CourseController::class, 'verify'])->middleware('auth', 'admin')->name('course.verify');
+Route::patch("/course/verify", [CourseController::class, 'verify'])
+->middleware('auth', 'admin')->name('course.verify');
+
+Route::post('/course/new', [CourseController::class, 'new'])
+->middleware('auth', 'lecturer')->name('course.new');
+
+Route::get('/course/edit/{id}', [CourseController::class,'editCourse'])
+->middleware('auth', 'lecturer')->name('course.edit')
+
 ?>

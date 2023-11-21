@@ -66,6 +66,7 @@ class CourseFactory extends Factory
             'category' => $category,
             'level' => fake()->randomElement(["Dasar", "Pemula", "Menengah", "Mahir"]),
             'photo' => 'course/default.jpeg',
+            'draft' => false,
         ];
     }
 }

@@ -9,9 +9,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    
-                    <x-search width="50%"></x-search>
-
                     @if (session('status'))
                         @if(session('status') == 'success')
                         <x-success-alert> Course has been verified </x-success-alert>
@@ -26,7 +23,21 @@
                         <div class="grid grid-cols-3 gap-7 mt-10 justify-between">
                             @foreach ($unverifiedCourses as $course)
                                 <div class="w-fit mb-5">
-                                    <x-course-card :id="$course->id" :title="$course->title" :category="$course->category" :level="$course->level" :image="$course->photo" :description="$course->description" :verified="$course->verified"></x-course-card>
+                                    <x-course-card :id="$course->id" :title="$course->title" :category="$course->category" :level="$course->level" :image="$course->photo" :description="$course->description" :verified="$course->verified">
+                                        <div class="flex justify-between">
+                                            <a href="#" class="px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                Detail
+                                            </a>
+                                            <form method="POST" action="{{ url('/course/verify') }}">
+                                                @method('PATCH')    
+                                                @csrf
+                                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                                <button type="submit" class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                    Verify
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </x-course-card>
                                 </div>
                             @endforeach
                         </div>
