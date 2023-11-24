@@ -44,6 +44,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $guarded = [
+        'role_type',
+        'role_id',
+        'email_verified_at'
+    ];
+
     public function role(): MorphTo
     {
         return $this->morphTo();

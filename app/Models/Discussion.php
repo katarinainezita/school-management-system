@@ -5,35 +5,34 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Section extends Model
+class Discussion extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'order'
+        'comment'
     ];
 
     protected $guarded = [
-        'content_id',
-        'content_type',
+        'owner_id',
+        'owner_type'
     ];
 
-    public function module(): BelongsTo
+    public function section(): BelongsTo
     {
-        return $this->belongsTo(Module::class);
+        return $this->belongsTo(Section::class);
     }
 
-    public function content(): MorphTo
+    public function owner(): MorphTo
     {
         return $this->morphTo();
     }
 
-    public function discussions(): HasMany
+    public function reply(): HasMany
     {
-        return $this->hasMany(Discussion::class);
+        return $this->hasMany(Reply::class);
     }
 }

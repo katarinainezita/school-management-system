@@ -14,9 +14,7 @@ class Admin extends Model implements Authenticatable
     use AuthenticatableTrait;
 
     protected $fillable=[
-        'name',
-        'email',
-        'password'
+        'name'
     ];
 
     public function user(): MorphOne

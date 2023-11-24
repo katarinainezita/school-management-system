@@ -21,6 +21,8 @@ class LecturerFactory extends Factory
             'name' => fake()->name(),
             'phoneNumber' => fake()->phoneNumber(),
             'description' => fake()->sentence(),
+            'dateOfBirth' => fake()->date(),
+            'photo'=> 'assets/lecturer-default.png',
         ];
     }
 }

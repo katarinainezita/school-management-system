@@ -18,9 +18,19 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(): RedirectResponse
     {
-        return view('auth.register');
+        return redirect(route('register.lecturer'));
+    }
+
+    public function createLecturer()
+    {
+        return view('auth.register-lecturer');
+    }
+
+    public function createStudent()
+    {
+        return view('auth.register-student');
     }
 
     /**
@@ -28,6 +38,13 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
+    public function storeLecturer(Request $request): RedirectResponse
+    {}
+
+    public function storeStudent(Request $request): RedirectResponse
+    {}
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -58,6 +75,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(route('home'));
     }
 }

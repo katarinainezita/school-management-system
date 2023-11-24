@@ -19,7 +19,7 @@ class CourseFactory extends Factory
         $title = "";
         $description = "";
 
-        $category = fake()->randomElement(["Cybersecurity", "Machine Learning", "Front End", "Backend", "Android", "IOS", "IoT"]);
+        $category = fake()->unique()->randomElement(["Cybersecurity", "Machine Learning", "Front End", "Backend", "Android", "IOS", "IoT", "Cloud Computing", "Data Science", "Economy"]);
 
         if($category == "Cybersecurity") {
             $title = "Foundation of Cybersecurity";
@@ -58,6 +58,18 @@ class CourseFactory extends Factory
         else if($category == "IoT") {
             $title = "An Introduction to Programming the Internet of Things (IOT) Specialization";
             $description = "This Specialization covers embedded systems, the Raspberry Pi Platform, and the Arduino environment for building devices that can control the physical world. In the final Capstone Project, you’ll apply the skills you learned by designing, building, and testing a microcontroller-based embedded system, producing a unique final project suitable for showcasing to future employers. Please note that this specialization does not offer discussion forums.";
+        }
+        else if($category == "Cloud Computing"){
+            $title = "Introduction to Information Technology and AWS Cloud";
+            $description = "Technology is omnipresent, but how did we get here? And what does the future hold for a world that's increasingly connected, mobile and data-rich? This course is intended to give learners enough technical context to understand how to build solutions in the cloud starting from zero technical knowledge. Before diving into the cloud, we will cover the basics of: how do computers work (including software and operating systems), an introduction to information technology, the basics of modern IT infrastructure, and the cloud careers that will be increasingly in-demand. We will then move into the world of internet connected networks (the Internet), covering local hosts, web servers, web applications, web security, the inner workings of a website and the differences between static and dynamic content. We'll close the course by introducing Cloud Computing, its role in our world, the differences between public, private and hybrid, and why APIs are so important.";
+        }
+        else if($category == "Data Science"){
+            $title = "Foundations of Data Science";
+            $description = "This is the first of seven courses in the Google Advanced Data Analytics Certificate, which will help develop the skills needed to apply for more advanced data professional roles, such as an entry-level data scientist or advanced-level data analyst. Data professionals analyze data to help businesses make better decisions. To do this, they use powerful techniques like data storytelling, statistics, and machine learning. In this course, you’ll begin your learning journey by exploring the role of data professionals in the workplace. You’ll also learn about the project workflow PACE (Plan, Analyze, Construct, Execute) and how it can help you organize data projects.";
+        }
+        else if ($category == "Economy"){
+            $title = "Game Theory";
+            $description = "Popularized by movies such as \"A Beautiful Mind,\" game theory is the mathematical modeling of strategic interaction among rational (and irrational) agents. Beyond what we call `games' in common language, such as chess, poker, soccer, etc., it includes the modeling of conflict among nations, political campaigns, competition among firms, and trading behavior in markets such as the NYSE. How could you begin to model keyword auctions, and peer to peer file-sharing networks, without accounting for the incentives of the people using them? The course will provide the basics: representing games and strategies, the extensive form (which computer scientists call game trees), Bayesian games (modeling things like auctions), repeated and stochastic games, and more. We'll include a variety of examples including classic games and a few applications.";
         }
 
         return [

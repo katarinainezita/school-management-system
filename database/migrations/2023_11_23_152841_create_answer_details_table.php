@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Module;
+use App\Models\TestAnswer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sections', function (Blueprint $table) {
+        Schema::create('answer_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Module::class);
-            $table->string('title', 100);
-            $table->integer('order');
-            $table->integer('content_id');
-            $table->string('content_type');
+            $table->foreignIdFor(TestAnswer::class);
+            $table->integer('number');
+            $table->integer('answer');  // based on options order
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sections');
+        Schema::dropIfExists('answer_details');
     }
 };

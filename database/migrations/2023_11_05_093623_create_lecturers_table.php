@@ -16,8 +16,11 @@ return new class extends Migration
             $table->id();
             $table->string('name', 300);
             $table->string('phoneNumber', 20);
-            $table->string('speciality', 100)->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->date('dateOfBirth');
+            $table->string('photo')->nullable();
+            $table->integer('totalStudents')->default(0);
+            $table->integer('reviews')->default(0);     // sum of reviews in all of their course's
             $table->timestamps();
         });
     }

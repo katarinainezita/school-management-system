@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
@@ -12,14 +13,26 @@ class Lecturer extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+        'name',
+        'phoneNumber',
+        'Description',
+        'photo'
+    ];
+
     public function user(): MorphOne
     {
         return $this->MorphOne(User::class, 'role');
     }
 
-    public function courses(): BelongsToMany
+    public function courses(): HasMany
     {
-        return $this->belongsToMany(Course::class);
+        return $this->hasMany(Course::class);
+    }
+
+    public function draftCourses()
+    {
+        return $this->hasMany(Course::class)->where('draft', true);
     }
 
     public function education(): MorphMany

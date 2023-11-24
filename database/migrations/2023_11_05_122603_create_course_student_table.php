@@ -17,8 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Course::class);
             $table->foreignIdFor(Student::class);
-            $table->boolean('finish')->default(false);
-            $table->integer('score')->nullable();
+            $table->double('courseCompletion', 3, 2)->default(0.00);   // learning percentage progress
+            $table->string('status', 20)->default('learning progress'); // cart, learning progress, completed
+            $table->integer('score')->nullable()->default(0);   // mean score from task and assignment
+            $table->text('review')->nullable();
+            $table->decimal('rating', 1, 2)->nullable();
             $table->timestamps();
         });
     }

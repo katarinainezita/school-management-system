@@ -11,7 +11,12 @@ class Module extends Model
 {
     use HasFactory;
 
-    public function module(): BelongsTo
+    protected $fillable = [
+        'title',
+        'order'
+    ];
+
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }

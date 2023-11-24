@@ -19,7 +19,7 @@ class StudentFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'profilePicture' => 'student/default.jpg',
+            'profilePicture' => 'assets/student-default.jpg',
             'dateOfBirth' => fake()->date(),
             'phoneNumber' => fake()->phoneNumber(),
         ];

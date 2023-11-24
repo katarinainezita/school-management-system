@@ -14,11 +14,9 @@ class Student extends Model
 
     protected $fillable=[
         'name',
-        'email',
-        'password',
-        'class',
+        'profilePicture',
         'dateOfBirth',
-        'profilePicture'
+        'phoneNumber'
     ];
 
     public function user(): MorphOne
@@ -31,6 +29,21 @@ class Student extends Model
         return $this->belongsToMany(Course::class);
     }
 
+    public function cartCourses(): BelongsToMany
+    {
+        return $this->belongsToMany(Course::class)->wherePivot('status', 'cart');
+    }
+
+    public function progressCourses(): BelongsToMany
+    {
+        return $this->belongsToMany(Course::class)->wherePivot('status', 'learning progress')->withPivot('courseCompletion', 'score');
+    }
+
+    public function completedCourses(): BelongsToMany
+    {
+        return $this->belongsToMany(Course::class)->wherePivot('status', 'completed')->withPivot('score', 'review', 'rating');
+    }
+
     public function education(): MorphMany
     {
         return $this->morphMany(Education::class,'owner');
@@ -40,4 +53,15 @@ class Student extends Model
     {
         return $this->morphMany(WorkingExperience::class,'owner');
     }
+
+    public function discussions(): MorphMany
+    {
+        return $this->morphMany(Discussion::class,'owner');
+    }
+
+    public function replies(): MorphMany
+    {
+        return $this->morphMany(Reply::class,'owner');
+    }
+
 }
