@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -137,4 +137,48 @@
             </div>
         </div>
     </body>
-</html>
+</html> --}}
+
+{{-- <!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laravel Course Page</title>
+    <!-- Add your styles and fonts here -->
+</head>
+<body class="antialiased">
+    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+        @if (Route::has('login'))
+            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                @auth
+                    <a href="{{ url('/admin/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                    @endif
+                @endauth
+            </div>
+        @endif
+
+        <div class="mx-auto max-w-7xl p-6">
+            <h1 class="text-3xl font-semibold mb-6">Explore Our Courses</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach ($verifiedCourses as $course)
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="text-xl font-semibold mb-4">{{ $course->title }}</h2>
+                        <p>{{ $course->description }}</p>
+                        <div class="mt-4">
+                            <span class="text-gray-500">Modules: {{ $course->modules }}</span>
+                            <span class="ml-4 text-gray-500">Sections: {{ $course->sections }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</body>
+</html> --}}
