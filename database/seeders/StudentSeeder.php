@@ -18,7 +18,7 @@ class StudentSeeder extends Seeder
     {
         //
         Student::factory()
-                ->count(15)
+                ->count(10)
                 ->has(Education::factory()
                                 ->count(1)
                                 ->state(['level' => 'S1']))

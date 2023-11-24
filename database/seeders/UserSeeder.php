@@ -43,11 +43,26 @@ class UserSeeder extends Seeder
                     ['role_id' => 13],
                     ['role_id' => 14],
                     ['role_id' => 15],
+                    ['role_id' => 16],
+                    ['role_id' => 17],
+                    ['role_id' => 18],
+                    ['role_id' => 19],
+                    ['role_id' => 20],
+                    ['role_id' => 21],
+                    ['role_id' => 22],
+                    ['role_id' => 23],
+                    ['role_id' => 24],
+                    ['role_id' => 25],
+                    ['role_id' => 26],
+                    ['role_id' => 27],
+                    ['role_id' => 28],
+                    ['role_id' => 29],
+                    ['role_id' => 30],
                 )
                 ->create();
 
         User::factory()
-                ->count(20)
+                ->count(10)
                 ->for(Lecturer::factory(), 'role')
                 ->sequence(
                     ['role_id' => 1],

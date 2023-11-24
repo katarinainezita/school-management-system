@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\WorkingExperience;
+use App\Models\Article;
 use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -37,16 +38,8 @@ class CourseSeeder extends Seeder
                                                     ['order'=> 3],
                                                     ['order'=> 4],
                                                     ['order'=> 5],
-                                                )))
-                ->has(Lecturer::factory()
-                                ->count(2)
-                                ->has(Education::factory()
-                                                ->count(2)
-                                                ->sequence(
-                                                    ['level' => 'S1'],
-                                                    ['level' => 'S2']
-                                                ))
-                                ->has(WorkingExperience::factory()->count(2)))
+                                                )
+                                                ->for(Article::factory(), 'content')))
                 ->has(Student::factory()
                                 ->count(3)
                                 ->has(Education::factory()
@@ -54,6 +47,18 @@ class CourseSeeder extends Seeder
                                                 ->state(['level' => 'S1'])
                                     )
                     )
+                ->sequence(
+                    ['lecturer_id' => 1],
+                    ['lecturer_id' => 2],
+                    ['lecturer_id' => 3],
+                    ['lecturer_id' => 4],
+                    ['lecturer_id' => 5],
+                    ['lecturer_id' => 6],
+                    ['lecturer_id' => 7],
+                    ['lecturer_id' => 8],
+                    ['lecturer_id' => 9],
+                    ['lecturer_id' => 10],
+                )
                 ->create();
         // DB::table('courses')->insert([
         //     'name' => 'Mathematics',

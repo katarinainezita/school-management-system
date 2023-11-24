@@ -18,7 +18,7 @@ class LecturerSeeder extends Seeder
     public function run(): void
     {
         Lecturer::factory()
-                ->count(5)
+                ->count(10)
                 ->has(Education::factory()
                                 ->count(2)
                                 ->sequence(

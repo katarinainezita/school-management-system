@@ -31,7 +31,7 @@ class Course extends Model
         return $this->belongsToMany(Student::class)->wherePivotIn('status', ['learning progress', 'completed']);
     }
 
-    public function lecturers(): BelongsTo
+    public function lecturer(): BelongsTo
     {
         return $this->belongsTo(lecturer::class);
     }

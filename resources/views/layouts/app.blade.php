@@ -15,12 +15,25 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+        <div class="h-screen bg-gray-100 dark:bg-gray-900">
+            @auth
+                @if(Auth::user()->isAdmin())
+                    @include('layouts.admin-navigation')
+                @endif
+                @if(Auth::user()->isStudent())
+                    @include('layouts.student-navigation')
+                @endif
+                @if(Auth::user()->isLecturer())
+                    @include('layouts.lecturer-navigation')
+                @endif
+            @endauth
+            @guest
+                @include('layouts.guest-navigation')
+            @endguest
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
+                <header class="bg-white dark:bg-gray-800 h-[10%] border-y-2">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -28,7 +41,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="h-[80%]">
                 {{ $slot }}
             </main>
         </div>
