@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-}) -> name('home');
+// Route::get('/dashboard', function () {
+//     return view('guest.dashboard');
+// }) -> name('guest.dashboard');
+
+Route::get('/', [CourseController::class, 'showCourses'])->name('guest.courses');
 
 // Route::get('/student/dashboard', function () {
 //     return view('student.dashboard');

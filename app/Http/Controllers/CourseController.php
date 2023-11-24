@@ -46,4 +46,14 @@ class CourseController extends Controller
             'course' => $course,
         ]);
     }
+
+    public function showCourses()
+    {
+        $courses = Course::all();
+
+        return view('guest.courses', [
+            'courses' => $courses,
+        ]);
+    }
+
 }
