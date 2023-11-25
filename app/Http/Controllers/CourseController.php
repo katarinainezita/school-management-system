@@ -5,6 +5,7 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
@@ -25,17 +26,17 @@ class CourseController extends Controller
         $course->description = $request->description;
         $course->category = $request->category;
         $course->level = $request->level;
-        $course->save();
+        $course->slug = Str::slug($request->title);
 
-        Auth::User()->role->courses()->attach($course->id);
+        Auth::user()->role->courses()->save($course);
 
-        return redirect('/course/edit/'.$course->id);
+        return redirect(route('course.edit', ['slug' => $course->slug]));
     }
 
-    public function editCourse ($id)
+    public function editCourse ($slug)
     {
         // check permission
-        $course = Auth::user()->role->courses->where('id', $id)->first();
+        $course = Auth::user()->role->courses->where('slug', $slug)->first();
         if($course == null) {
             abort(403, 'Unauthorized action');
         }

@@ -37,10 +37,9 @@
                         <x-label-form for="level" textSize="text-md" fontWeight="font-medium">Level</x-label-form>
                         <x-select-input-form id='level' name="level">
                             <option selected></option>
-                            <option value="Dasar">Dasar</option>
-                            <option value="Pemula">Pemula</option>
-                            <option value="Menengah">Menengah</option>
-                            <option value="Mahir">Mahir</option>
+                            <option value="Basic">Basic</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
                         </x-select-input-form>
                     </div>
 

@@ -18,7 +18,8 @@ class Course extends Model
         'description',
         'category',
         'level',
-        'photo'
+        'photo',
+        'slug'
     ];
 
     protected $guarded = [
