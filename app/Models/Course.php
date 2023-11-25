@@ -56,4 +56,9 @@ class Course extends Model
     {
         return $this->modules()->with('sections')->get()->flatMap->sections->count();
     }
+
+    public function rejections(): HasMany
+    {
+        return $this->hasMany(CoursesRejected::class);
+    }
 }
