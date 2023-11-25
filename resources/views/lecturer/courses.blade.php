@@ -22,8 +22,8 @@
                                         <div class="w-fit mb-5">
                                             <x-course-card :id="$course->id" :title="$course->title" :category="$course->category" :level="$course->level" :image="$course->photo" :description="$course->description" :verified="$course->verified">
                                                 <div class="flex justify-between">
-                                                    <a href="#" class="px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                        Detail
+                                                    <a href="{{ route('course.edit', ['slug' => $course->slug]) }}" class="px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        Edit
                                                     </a>
                                                 </div>
                                             </x-course-card>

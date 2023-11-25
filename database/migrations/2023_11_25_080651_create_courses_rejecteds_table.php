@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('courses_rejecteds', function (Blueprint $table) {
             $table->id();
             $table->text('message');
+            $table->boolean('read_status')->default(false); // read status by lecturer
             $table->foreignIdFor(Course::class);
             $table->foreignIdFor(Admin::class);
             $table->timestamps();

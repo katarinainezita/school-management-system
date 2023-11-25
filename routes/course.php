@@ -10,6 +10,6 @@ Route::post('/new', [CourseController::class, 'new'])
 ->middleware('auth', 'lecturer')->name('course.new');
 
 Route::get('/edit/{slug}', [CourseController::class,'editCourse'])
-->middleware('auth', 'lecturer')->name('course.edit')
+->middleware('auth', 'lecturer', 'course.edit')->name('course.edit')
 
 ?>
