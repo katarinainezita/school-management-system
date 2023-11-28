@@ -33,19 +33,42 @@ class CourseController extends Controller
         return redirect(route('course.edit', ['slug' => $course->slug]));
     }
 
-    public function editCourse ($slug)
+    public function showEditCourse ($slug)
     {
-        // check permission
         $course = Auth::user()->role->courses->where('slug', $slug)->first();
-        if($course == null) {
-            abort(403, 'Unauthorized action');
-        }
+        $course->totalStudents = $course->students->count();
 
         $module = $course->module;
 
         return view('course.edit', [
             'course' => $course,
         ]);
+    }
+
+    public function editCourseTitle(Request $request, $slug): RedirectResponse
+    {
+        $course = Course::where('slug', '=', $slug)->orWhere('title', '=', $request->course_title);
+
+        // check if title already used
+        if($course->count() > 1)
+        {
+            return redirect(route('course.edit', ['slug' => $slug]))->with(['status' => 'fail', 'message' => 'Cann\'t changed the title, duplicate title' ]);
+        }
+
+        $course = $course->first();
+        $course->title = $request->course_title;
+        $course->save();
+
+        return redirect(route('course.edit', ['slug' => $slug]))->with(['status' => 'success', 'message' => 'Course\'s title has been changed' ]);
+    }
+
+    public function editCourseDesc(Request $request, $slug): RedirectResponse
+    {
+        $course = Course::where('slug', $slug)->firstOrFail();
+        $course->description = $request->course_description;
+        $course->save();
+
+        return redirect(route('course.edit', ['slug' => $slug]))->with(['status' => 'success', 'message' => 'Course\'s description has been changed' ]);
     }
 
     public function showCourses()
@@ -55,6 +78,12 @@ class CourseController extends Controller
         return view('guest.courses', [
             'courses' => $courses,
         ]);
+    }
+
+    public function showContent($slug, $module_order, $section_order)
+    {
+        $string = $slug." ".$module_order." ".$section_order;
+        return $string;
     }
 
 }

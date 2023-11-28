@@ -1,4 +1,4 @@
-<div class="relative flex flex-col bg-clip-border rounded-r-xl bg-slate-300 text-gray-700 h-full w-fit p-4 shadow-xl shadow-blue-gray-900/5">
+<div class="relative flex flex-col bg-clip-border rounded-r-xl bg-slate-300 text-gray-700 w-fit p-4 shadow-xl shadow-blue-gray-900/5">
   <div class="flex mb-2 p-2">
     <button class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-gray-900 w-7 h-7 text-center" x-on:click="open=!open" type="button">M</button>
   </div>

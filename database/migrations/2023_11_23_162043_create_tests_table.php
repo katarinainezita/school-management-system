@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->integer('totalNumber');
-            $table->time('duration');
+            $table->integer('totalNumber')->default(0);
+            $table->time('duration')->nullable();
             $table->timestamps();
         });
     }

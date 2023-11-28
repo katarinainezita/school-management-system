@@ -32,6 +32,21 @@ class Section extends Model
         return $this->morphTo();
     }
 
+    public function isArticle(): bool
+    {
+        return $this->content_type == 'App\Models\Article';
+    }
+
+    public function isVideo(): bool
+    {
+        return $this->content_type == 'App\Models\Video';
+    }
+
+    public function isQuiz(): bool
+    {
+        return $this->content_type == 'App\Models\Test';
+    }
+
     public function discussions(): HasMany
     {
         return $this->hasMany(Discussion::class);

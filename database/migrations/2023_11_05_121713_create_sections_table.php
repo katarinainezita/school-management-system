@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignIdFor(Module::class);
             $table->string('title', 100);
             $table->integer('order');
-            $table->integer('content_id');
-            $table->string('content_type');
+            $table->integer('content_id')->nullable();
+            $table->string('content_type')->nullable();
             $table->timestamps();
         });
     }
