@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
 
 class EnsureCourseEditAuthorization
 {
@@ -17,10 +18,16 @@ class EnsureCourseEditAuthorization
     public function handle(Request $request, Closure $next): Response
     {
         $slug = $request->route('slug');
-        $course2 = Auth::user()->role->courses->firstWhere('slug', $slug);
+        $course = Course::where('slug', $slug)->firstOrFail();
+
+        // check wether course is available
+        if($course == null)
+        {
+            abort(404, 'Course not found');
+        }
 
         // check wether lecturer has the course
-        if ($course2 == null) {
+        if (!$course->isLecturer(Auth::user()->role->id)) {
             abort(403, 'You are not allowed to edit this course');
         };
 
