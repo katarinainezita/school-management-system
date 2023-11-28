@@ -33,23 +33,20 @@
                 @endguest
             </div>
 
-            <main class="flex flex-col h-[88%] overflow-y-auto">
+            <div class="h-[12%]">
                 <!-- Page Heading -->
-                <div class="flex-none">
-                    @if (isset($header))
-                        <header class="flex items-center bg-white dark:bg-gray-800 border-y-2 h-16">
-                            <div class="max-w-7xl px-4 sm:px-6 lg:px-8">
-                                {{ $header }}
-                            </div>
-                        </header>
-                    @endif
-                </div>
+                @if (isset($header))
+                    <header class="flex items-center bg-white dark:bg-gray-800 border-y-2 h-full">
+                        <div class="max-w-7xl px-4 sm:px-6 lg:px-8">
+                            {{ $header }}
+                        </div>
+                    </header>
+                @endif
+            </div>
 
-                <!-- Page Content -->
-                <div class="grow">
-                    {{ $slot }}
-                </div>
-                
+            <!-- Page Content -->
+            <main class="h-[76%]">
+                {{ $slot }}
             </main>
         </div>
     </body>

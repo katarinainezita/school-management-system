@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-dashboard-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Lecturer\'s Courses') }}
@@ -9,9 +9,9 @@
         @include('lecturer.partials.sidebar')
 
         <div class="basis-4/5 grow w-full overflow-y-auto">
-            <div class="py-12">
+            <div class="py-12 ">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                             @include('lecturer.partials.add-course-form')
         
@@ -22,8 +22,8 @@
                                         <div class="w-fit mb-5">
                                             <x-course-card :id="$course->id" :title="$course->title" :category="$course->category" :level="$course->level" :image="$course->photo" :description="$course->description" :verified="$course->verified">
                                                 <div class="flex justify-between">
-                                                    <a href="#" class="px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                        Detail
+                                                    <a href="{{ route('course.edit', ['slug' => $course->slug]) }}" class="px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        Edit
                                                     </a>
                                                 </div>
                                             </x-course-card>
@@ -38,6 +38,4 @@
             </div>
         </div>
     </div>
-
-    
-</x-app-layout>
+</x-dashboard-layout>

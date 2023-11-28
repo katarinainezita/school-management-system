@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Course>
@@ -76,9 +77,10 @@ class CourseFactory extends Factory
             'title' => $title,
             'description' => $description,
             'category' => $category,
-            'level' => fake()->randomElement(["Basic", "Beginner", "Intermediate", "Advanced"]),
+            'level' => fake()->randomElement(["Beginner", "Intermediate", "Advanced"]),
             'photo' => 'course/default.jpeg',
             'draft' => false,
+            'slug' => Str::slug($title)
         ];
     }
 }

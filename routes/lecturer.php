@@ -13,6 +13,18 @@ Route::middleware(['auth', 'verified', 'lecturer'])->group(function () {
     Route::get('/lecturer/discussions', function () {
         return view('lecturer.dashboard');
     })->name('lecturer.discussions');
+
+    Route::get('/lecturer/discussions', function () {
+        return view('lecturer.dashboard');
+    })->name('lecturer.discussions');
+
+    Route::get('/lecturer/review', function () {
+        return view('lecturer.dashboard');
+    })->name('lecturer.review');
+
+    Route::get('/lecturer/rejection', function () {
+        return view('lecturer.dashboard');
+    })->name('lecturer.rejection');
 });
 
 ?>

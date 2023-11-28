@@ -18,7 +18,8 @@ class Course extends Model
         'description',
         'category',
         'level',
-        'photo'
+        'photo',
+        'slug'
     ];
 
     protected $guarded = [
@@ -28,7 +29,12 @@ class Course extends Model
 
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Student::class)->wherePivotIn('status', ['learning progress', 'completed']);
+        return $this->belongsToMany(Student::class)->wherePivotIn('status', ['learning progress', 'completed'])->withPivot('review', 'rating');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(CourseStudent::class)->select('review', 'rating')->whereNotNull(['review', 'rating']);
     }
 
     public function lecturer(): BelongsTo
@@ -46,13 +52,48 @@ class Course extends Model
         return $this->modules()->with('sections')->get()->flatMap->sections;
     }
 
-    public function numOfModules(): int
+    public function articles()
     {
-        return $this->modules()->count();
+        return $this->modules()->with('sections')->get()->flatMap->sections->where('content_type', 'App\Models\Article');
     }
 
-    public function numOfSections(): int
+    public function video()
     {
-        return $this->modules()->with('sections')->get()->flatMap->sections->count();
+        return $this->modules()->with('sections')->get()->flatMap->sections->where('content_type', 'App\Models\Video');
+    }
+
+    public function quiz()
+    {
+        return $this->modules()->with('sections')->get()->flatMap->sections->where('content_type', 'App\Models\Test');
+    }
+
+    public function numOfModules(): int
+    {
+        return $this->modules()->select('id')->count();
+    }
+
+    public function numOfSections()
+    {
+        return $this->modules()->select('id')->with('sections')->get()->flatMap->sections;
+    }
+
+    public function numOfArticles()
+    {
+        return $this->modules()->select('id')->with('sections')->get()->flatMap->sections->where('content_type', 'App\Models\Article')->count();
+    }
+
+    public function numOfVideo()
+    {
+        return $this->modules()->select('id')->with('sections')->get()->flatMap->sections->where('content_type', 'App\Models\Video')->count();
+    }
+
+    public function numOfQuiz()
+    {
+        return $this->modules()->select('id')->with('sections')->get()->flatMap->sections->where('content_type', 'App\Models\Test')->count();
+    }
+
+    public function rejections(): HasMany
+    {
+        return $this->hasMany(CoursesRejected::class);
     }
 }
