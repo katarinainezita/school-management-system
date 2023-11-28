@@ -24,26 +24,26 @@
         @endif
         </div>
 
-        @include('course.partials.edit-header')
+        @include('course.partials.edit-header', ['mode' => 'edit'])
     </div>
 
-    @include('course.partials.summary-card')
+    @include('course.partials.summary-card', ['mode' => 'edit'])
 
     <div class="border-x-2 px-10 py-14">
         <div class="flex flex-col w-[60%]">
             {{-- Description --}}
             <div class="mb-10">
-                @include('course.partials.edit-description')
+                @include('course.partials.edit-description', ['mode' => 'edit'])
             </div>
 
             {{-- Modules --}}
             <div class="mb-10">
-                @include('course.partials.edit-modules-list')
+                @include('course.partials.edit-modules-list', ['mode' => 'edit'])
             </div>
 
             {{-- Reviews --}}
             <div class="mb-10">
-                @include('course.partials.edit-review')
+                @include('course.partials.edit-review', ['mode' => 'edit'])
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@
             {{-- each modules --}}
             @foreach($course->modules as $module)
                 <div class="relative" x-data="{ spanSection:false, editModuleTitle:false, deleteModule:false}">
+                    @if($mode == 'edit')
                     {{-- delete button --}}
                     <button class="absolute top-0 right-0 w-[17px] h-fit" x-on:click="deleteModule = !deleteModule">
                         <img src="{{ asset('/storage/img/assets/minus-icon.png') }}" alt="delete-icon">
@@ -37,18 +38,21 @@
                     <button class="absolute top-0 right-[25px] w-[17px] h-fit" x-on:click="editModuleTitle = !editModuleTitle">
                         <img src="{{ asset('/storage/img/assets/pencil-icon.jpg') }}" alt="edit-icon">
                     </button>
+                    @endif
 
                     {{-- update button --}}
                     <x-list-item-button variable="spanSection">
                         {{-- module name --}}
                         <h1 class="text-lg" x-show="!editModuleTitle">{{ $module->title }}</h1>                        
 
+                        @if($mode == 'edit')
                         {{-- edit title form --}}
                         <form method="post" action="{{ route('module.edit.title', ['slug' => $course->slug, 'module_id' => $module->id]) }}" x-show="editModuleTitle">
                             @csrf
                             @method('patch')
                             <x-input-dashed id="module_title" name="module_title" textSize="text-lg" value="{{ $module->title }}"></x-input-dashed>
                         </form>
+                        @endif
 
                         {{-- module order and num of sections --}}
                         <h2 class="text-xs font-light text-gray-600">Module {{ $module->order }} <span class="font-extrabold">&#183;</span> {{ $module->numOfSections() }} sections</h2>
@@ -62,6 +66,9 @@
                     <div x-show="spanSection" class="ms-5">
                         @foreach ($module->sections as $section)
                         <div class="relative" x-data="{editSection:false, deleteSection:false}">
+
+                            @if($mode == 'edit')
+                            {{-- delete button --}}
                             <button class="absolute top-2 right-0 w-[10px] h-fit" x-on:click="deleteSection = !deleteSection">
                                 <img src="{{ asset('/storage/img/assets/minus-icon.png') }}" alt="delete-icon">
                             </button>
@@ -81,7 +88,9 @@
                                     </form>
                                 </x-modal>
                             </template>
-                            <a href="{{ route('lecturer.dashboard') }}">
+                            @endif
+
+                            <a href="{{ route('course.learn', ['slug' => $course->slug, 'module_order' => $module->order, 'section_order' => $section->order]) }}">
                                 <x-list-item-button bordered="border-none" margin='' padding='px-4'>
                                     {{-- symbol --}}
                                     <div class="flex">
@@ -99,12 +108,16 @@
                         </div>
                         @endforeach
 
+                        @if($mode == 'edit')
                         @include('course.partials.add-section-form')
+                        @endif
                     </div>
                 </div>                 
             @endforeach
 
+            @if($mode == 'edit')
             @include('course.partials.add-module-form')
+            @endif
         </div>
     </x-list-group>
 </div>

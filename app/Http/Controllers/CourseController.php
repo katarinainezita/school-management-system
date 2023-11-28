@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class CourseController extends Controller
 {
@@ -33,7 +34,17 @@ class CourseController extends Controller
         return redirect(route('course.edit', ['slug' => $course->slug]));
     }
 
-    public function showEditCourse ($slug)
+    public function showDetailCourse ($slug): View
+    {
+        $course = Course::where('slug', $slug)->first();
+        $course->lecturer = $course->lecturer()->select('name', 'photo')->first();
+
+        return view('course.detail', [
+            'course' => $course
+        ]);
+    }
+
+    public function showEditCourse ($slug): View
     {
         $course = Auth::user()->role->courses->where('slug', $slug)->first();
         $course->totalStudents = $course->students->count();
@@ -71,7 +82,7 @@ class CourseController extends Controller
         return redirect(route('course.edit', ['slug' => $slug]))->with(['status' => 'success', 'message' => 'Course\'s description has been changed' ]);
     }
 
-    public function showCourses()
+    public function showCourses(): View
     {
         $courses = Course::all();
 
@@ -80,10 +91,25 @@ class CourseController extends Controller
         ]);
     }
 
-    public function showContent($slug, $module_order, $section_order)
+    public function showContent($slug, $module_order, $section_order): View
     {
-        $string = $slug." ".$module_order." ".$section_order;
-        return $string;
+        $course = Course::where('slug', $slug)->first();
+        $course->modules = $course->modules()->select('id', 'title', 'order')->get();
+        
+        // get sections
+        foreach($course->modules as $module)
+        {
+            $module->sections = $module->sections()->select('id', 'title', 'order')->get();
+        }
+
+        // content
+        $moduleSelected = $course->modules()->select('id')->where('order', $module_order)->first();
+        $sectionSelected = $moduleSelected->sections()->select('id', 'title','content_id', 'content_type')->where('order', $section_order)->first();
+
+        return view('course.learn', [
+            'course' => $course,
+            'sectionSelected' => $sectionSelected
+        ]);
     }
 
 }
