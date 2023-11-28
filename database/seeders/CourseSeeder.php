@@ -33,13 +33,12 @@ class CourseSeeder extends Seeder
                                 )->has(Section::factory()
                                                 ->count(5)
                                                 ->sequence(
-                                                    ['order'=> 1],
-                                                    ['order'=> 2],
-                                                    ['order'=> 3],
-                                                    ['order'=> 4],
-                                                    ['order'=> 5],
-                                                )
-                                                ->for(Article::factory(), 'content')))
+                                                    ['order'=> 1, 'content_id'=>1, 'content_type'=>'App\Models\Article'],
+                                                    ['order'=> 2, 'content_id'=>2, 'content_type'=>'App\Models\Article'],
+                                                    ['order'=> 3, 'content_id'=>3, 'content_type'=>'App\Models\Article'],
+                                                    ['order'=> 4, 'content_id'=>4, 'content_type'=>'App\Models\Article'],
+                                                    ['order'=> 5, 'content_id'=>5, 'content_type'=>'App\Models\Article'],
+                                                )))
                 ->has(Student::factory()
                                 ->count(3)
                                 ->has(Education::factory()

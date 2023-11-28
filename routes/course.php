@@ -11,6 +11,9 @@ Route::patch("/verify", [CourseController::class, 'verify'])
 Route::post('/new', [CourseController::class, 'new'])
 ->middleware('auth', 'lecturer')->name('course.new');
 
+Route::get('/{slug}', [CourseController::class,'showDetailCourse'])
+->name('course.detail');
+
 Route::middleware(['auth', 'lecturer', 'course.edit'])->group(function (){
     // course
     Route::get('/edit/{slug}', [CourseController::class,'showEditCourse'])
@@ -43,7 +46,9 @@ Route::middleware(['auth', 'lecturer', 'course.edit'])->group(function (){
     ->name('section.edit');
 });
 
-Route::get('/learn/{slug}/{module_order}/{section_order}', [CourseController::class, 'showContent'])
-->middleware('auth', 'course.learn')->name('course.learn');
+Route::middleware(['auth', 'lecturer', 'course.learn'])->group(function (){
+    Route::get('/learn/{slug}/{module_order}/{section_order}', [CourseController::class, 'showContent'])
+    ->name('course.learn');
+});
 
 ?>

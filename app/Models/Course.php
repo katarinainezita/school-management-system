@@ -32,6 +32,11 @@ class Course extends Model
         return $this->belongsToMany(Student::class)->wherePivotIn('status', ['learning progress', 'completed'])->withPivot('review', 'rating');
     }
 
+    public function isStudent($id): bool
+    {
+        return $this->students()->select('id')->find($id) != null;
+    }
+
     public function reviews(): HasMany
     {
         return $this->hasMany(CourseStudent::class)->select('review', 'rating')->whereNotNull(['review', 'rating']);
@@ -40,6 +45,11 @@ class Course extends Model
     public function lecturer(): BelongsTo
     {
         return $this->belongsTo(lecturer::class);
+    }
+
+    public function isLecturer($id): bool
+    {
+        return $this->lecturer()->select('id')->first()->id == $id;
     }
 
     public function modules(): HasMany

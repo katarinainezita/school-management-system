@@ -18,7 +18,7 @@ class ArticleFactory extends Factory
     {
         return [
             //
-            'text' => fake()->text()
+            'text' => fake()->paragraphs(10, true)
         ];
     }
 }
