@@ -15,6 +15,7 @@ class Lecturer extends Model
 
     public $fillable = [
         'name',
+        'user_id',
         'phoneNumber',
         'Description',
         'photo'
