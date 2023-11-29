@@ -12,8 +12,8 @@ class AdminController extends Controller
     //
     public function showCourses(): View
     {
-        $verifiedCourses = Course::all()->where('verified', true);
-        $unverifiedCourses = Course::all()->where('verified', false);
+        $verifiedCourses = Course::where('verified', true)->get();
+        $unverifiedCourses = Course::where('verified', false)->get();
 
         foreach ($verifiedCourses as $course) {
             $course->modules = $course->numOfModules();
@@ -25,9 +25,6 @@ class AdminController extends Controller
             $course->sections = $course->numOfSections();
         }
 
-        return view('admin.course-list', [
-            'verifiedCourses' => $verifiedCourses,
-            'unverifiedCourses' => $unverifiedCourses,
-        ]);
+        return view('admin.course-list', compact('verifiedCourses', 'unverifiedCourses'));
     }
 }
