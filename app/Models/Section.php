@@ -32,6 +32,14 @@ class Section extends Model
         return $this->morphTo();
     }
 
+    public function article() {
+        return $this->hasOne(Article::class);
+    }
+
+    public function video() {
+        return $this->hasOne(Video::class);
+    }
+
     public function isArticle(): bool
     {
         return $this->content_type == 'App\Models\Article';

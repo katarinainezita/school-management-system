@@ -25,6 +25,7 @@ class ModuleController extends Controller
             $section = new Section;
             $section->title = "Section ".$i;
             $section->order = $i;
+            $section->content_type = 'App\Models\Article';
             $module->sections()->save($section);
         }
 

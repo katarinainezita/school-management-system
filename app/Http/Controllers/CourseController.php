@@ -40,7 +40,8 @@ class CourseController extends Controller
     public function showDetailCourse($slug): View
     {
         $course = Course::where('slug', $slug)->first();
-        $course->lecturer = $course->lecturer()->select('name', 'photo')->first();
+
+        $course->lecturer = $course->lecturer->select('name', 'photo')->first();
 
         return view('course.detail', [
             'course' => $course
@@ -54,9 +55,7 @@ class CourseController extends Controller
 
         $course->totalModules = $course->module;
 
-        return view('course.edit', [
-            'course' => $course,
-        ]);
+        return view('course.edit', compact('course'));
     }
 
     public function editCourseTitle(Request $request, $slug): RedirectResponse
@@ -88,15 +87,14 @@ class CourseController extends Controller
     {
         $courses = Course::all();
 
-        return view('guest.courses', [
-            'courses' => $courses,
-        ]);
+        return view('guest.courses', compact('courses'));
     }
 
     public function showContent($slug, $module_order, $section_order): View
     {
         $course = Course::where('slug', $slug)->first();
         $course->modules = $course->modules()->select('id', 'title', 'order')->get();
+        $content = null;
 
         // get sections
         foreach ($course->modules as $module) {

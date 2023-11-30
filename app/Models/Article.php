@@ -10,9 +10,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'text'
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function section(): MorphOne
     {
