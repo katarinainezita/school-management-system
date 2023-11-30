@@ -42,6 +42,10 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
+    public function lecturer() {
+        return $this->hasOne(Lecturer::class, 'user_id');
+    }
+
     public function isAdmin(): bool
     {
         return $this->role_type == 'App\Models\Admin';
