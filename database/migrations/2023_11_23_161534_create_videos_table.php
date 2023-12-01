@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('section_id')->nullable();
             $table->string('video', 200)->nullable();
             $table->timestamps();
         });

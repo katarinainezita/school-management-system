@@ -14,10 +14,11 @@ return new class extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->string('name', 300);
-            $table->string('phoneNumber', 20);
+            $table->string('phoneNumber', 20)->nullable();
             $table->text('description')->nullable();
-            $table->date('dateOfBirth');
+            $table->date('dateOfBirth')->nullable();
             $table->string('photo')->nullable();
             $table->integer('totalStudents')->default(0);
             $table->integer('reviews')->default(0);     // sum of reviews in all of their course's

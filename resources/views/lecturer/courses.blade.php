@@ -15,7 +15,7 @@
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                             @include('lecturer.partials.add-course-form')
         
-                            @if (count($courses) != 0)
+                            @if (count($courses) > 0)
                                 <h1 class="font-bold text-2xl text-green-500 mt-5">Your Courses</h1>
                                 <div class="grid grid-cols-3 gap-7 mt-10 justify-between">
                                     @foreach ($courses as $course)

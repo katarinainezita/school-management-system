@@ -14,10 +14,11 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->string('name', 300);
             $table->string('profilePicture', 200)->nullable();
-            $table->date('dateOfBirth');
-            $table->string('phoneNumber', 20);
+            $table->date('dateOfBirth')->nullable();
+            $table->string('phoneNumber', 20)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

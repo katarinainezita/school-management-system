@@ -44,7 +44,7 @@ class Course extends Model
 
     public function lecturer(): BelongsTo
     {
-        return $this->belongsTo(lecturer::class);
+        return $this->belongsTo(Lecturer::class);
     }
 
     public function isLecturer($id): bool

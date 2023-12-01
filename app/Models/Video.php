@@ -11,7 +11,8 @@ class Video extends Model
     use HasFactory;
 
     protected $fillable = [
-        'video'
+        'video',
+        'section_id'
     ];
 
     public function section(): MorphOne

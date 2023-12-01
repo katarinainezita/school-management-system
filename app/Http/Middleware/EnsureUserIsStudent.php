@@ -18,7 +18,7 @@ class EnsureUserIsStudent
     {
         if(! $request->user()->isStudent())
         {
-            return Redirect::route("home");
+            return Redirect::route('guest.courses');
         }
         
         return $next($request);

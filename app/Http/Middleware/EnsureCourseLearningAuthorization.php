@@ -30,7 +30,7 @@ class EnsureCourseLearningAuthorization
         // if lecturer and is not their course
         if(Auth::user()->isLecturer())
         {
-            if(!$course->isLecturer($userProfile->id))
+            if(!$course->isLecturer(Auth::user()->lecturer->id))
             {
                 abort(403, 'You are not allowed to open this course');
             }

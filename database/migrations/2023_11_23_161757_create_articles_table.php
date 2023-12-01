@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('section_id')->nullable();
             $table->text('text')->nullable();
             $table->timestamps();
         });

@@ -27,7 +27,7 @@ class EnsureCourseEditAuthorization
         }
 
         // check wether lecturer has the course
-        if (!$course->isLecturer(Auth::user()->role->id)) {
+        if (!$course->isLecturer(Auth::user()->lecturer->id)) {
             abort(403, 'You are not allowed to edit this course');
         };
 
