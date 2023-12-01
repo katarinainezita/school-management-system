@@ -8,6 +8,6 @@ Route::middleware(['auth', 'verified', 'student'])->group(function () {
     Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
     Route::post('/student/course/add', [CartController::class, 'add'])->name('cart.add');
     Route::patch('/sudent/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-});
 
-?>
+    Route::get("/student/my-course", [StudentController::class, 'myCourse'])->name('student.mycourse');
+});
