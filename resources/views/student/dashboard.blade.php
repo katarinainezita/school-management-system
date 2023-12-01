@@ -1,4 +1,7 @@
 <x-app-layout>
+    @php
+        $showModal = false; // Set the initial value of $showModal
+    @endphp
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard Student') }}
@@ -13,11 +16,67 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
-                            {{ __("You're logged in!") }}
+
+                            <div class="flex justify-between items-center p-4 mb-4">
+                                <h1 class="text-2xl font-bold">{{ __('Course yang tersedia') }}</h1>
+
+                                <button x-on:click="$dispatch('open-modal', 'cardModal')"> <x-bxs-cart
+                                        class="w-10 h-10 hover:cursor-pointer" />
+
+                                    @if ($cartItemsArray['data'])
+                                        <div class="rounded-full bg-red-500 text-white">
+                                            {{ count($cartItemsArray['data']) }}
+                                    @endif
+
+                            </div>
+                            </button>
+
                         </div>
+
+
+                        <x-modal name="cardModal" :show="$showModal" maxWidth="2xl">
+                            <div class="p-6">
+                                <h2 class="text-2xl font-bold mb-4">Keranjang</h2>
+
+
+                                @foreach ($cartItemsArray as $items)
+                                    <div class="flex flex-col gap-2">
+                                        @if ($items)
+                                            @foreach ($items as $item)
+                                                <x-cart-card :item="$item"></x-cart-card>
+                                            @endforeach
+                                        @else
+                                            <div class="text-blue-500 font-medium text-lg text-center">Keranjang
+                                                kamu kosong...</div>
+                                        @endif
+
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </x-modal>
+
+
+
+
+                        <x-layout-card>
+                            @foreach ($courses as $course)
+                                <x-course-card :course="$course">
+                                    <x-form-button :action="route('cart.add', ['course' => $course->id])" class="p-2 bg-blue-500 text-white rounded-lg">
+                                        <div class="flex items-center gap-2 w-full">
+                                            <x-bxs-cart class="w-5 h-5 hover:cursor-pointer" />
+                                            <span>Tambah</span>
+                                        </div>
+                                    </x-form-button>
+                                </x-course-card>
+                            @endforeach
+                        </x-layout-card>
+
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>
