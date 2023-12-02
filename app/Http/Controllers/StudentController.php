@@ -55,4 +55,11 @@ class StudentController extends Controller
 
         return view('student.my-course', compact('courses'));
     }
+
+    public function detail($slug)
+    {
+        $course = Course::where('slug', $slug)->first();
+
+        return view('student.detail-course', compact('course'));
+    }
 }

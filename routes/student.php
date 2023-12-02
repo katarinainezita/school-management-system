@@ -10,4 +10,7 @@ Route::middleware(['auth', 'verified', 'student'])->group(function () {
     Route::patch('/sudent/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     Route::get("/student/my-course", [StudentController::class, 'myCourse'])->name('student.mycourse');
+
+    Route::get("/student/course/{slug}", [StudentController::class, 'detail'])->name('student.detail');
+    
 });

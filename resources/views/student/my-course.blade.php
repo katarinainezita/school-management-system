@@ -45,7 +45,10 @@
                             <x-layout-card>
                                 @foreach ($courses as $course)
                                     <x-course-card :course="$course">
-                                        <x-button>Mulai Belajar</x-button>
+                                        <a
+                                            href="{{ route('student.detail', ['slug' => $course->slug]) }}
+                                        "><x-button>Detail</x-button></a>
+
                                     </x-course-card>
                                 @endforeach
                             </x-layout-card>
