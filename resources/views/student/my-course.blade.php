@@ -19,17 +19,33 @@
                             </div>
 
                             @if (Request::get('query'))
-                                <div class="flex items-center gap-4 text-blue-500 mb-4">
+                                <div class="flex items-center gap-4 font-semibold text-blue-500 mb-4">
                                     <div class="ml-4 text-lg">Hasil pencarian : {{ Request::get('query') }} </div>
-                                    <a class="font-bold p-2 bg-gray-200 text-gray-700 rounded-lg"
+                                    <a class="text-red-500 underline font-semibold"
                                         href="{{ route('student.mycourse') }}">Reset</a>
+                                </div>
+                            @endif
+
+                            @if (Request::get('level') || Request::get('category'))
+                                <div class="flex items-center gap-2 mx-4 mb-4">
+                                    @if (Request::get('category'))
+                                        <x-badge
+                                            class="bg-blue-100 text-blue-500 px-2 font-semibold">{{ Request::get('category') }}</x-badge>
+                                    @endif
+                                    @if (Request::get('level'))
+                                        <x-badge
+                                            class="bg-pink-100 text-pink-500 px-2 font-semibold">{{ Request::get('level') }}</x-badge>
+                                    @endif
+
+                                    <a class="text-red-500 underline font-semibold"
+                                        href="{{ route('student.mycourse') }}">Reset Filter</a>
                                 </div>
                             @endif
 
                             <x-layout-card>
                                 @foreach ($courses as $course)
                                     <x-course-card :course="$course">
-
+                                        <x-button>Mulai Belajar</x-button>
                                     </x-course-card>
                                 @endforeach
                             </x-layout-card>

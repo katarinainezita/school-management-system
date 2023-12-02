@@ -10,7 +10,7 @@
 
 
     <x-form-button :action="route('cart.checkout', ['course' => $item['id']])" method="PATCH" class="px-2 py-1 rounded-lg bg-blue-500 text-white">
-        Beli
+        Buy
     </x-form-button>
 
 </div>

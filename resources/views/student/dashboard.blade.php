@@ -23,7 +23,7 @@
 
 
                             <div class="flex justify-between items-center p-4 mb-4">
-                                <h1 class="text-2xl font-bold">{{ __('Course yang tersedia') }}</h1>
+                                <h1 class="text-2xl font-bold">{{ __('Course') }}</h1>
 
                                 <button x-on:click="$dispatch('open-modal', 'cardModal')"> <x-bxs-cart
                                         class="w-10 h-10 hover:cursor-pointer" />
@@ -42,10 +42,26 @@
                         </div>
 
                         @if (Request::get('query'))
-                            <div class="flex items-center gap-4 text-blue-500">
+                            <div class="flex items-center gap-4 font-semibold text-blue-500">
                                 <div class="ml-4 text-lg">Hasil pencarian : {{ Request::get('query') }} </div>
-                                <a class="font-bold p-2 bg-gray-200 text-gray-700 rounded-lg"
+                                <a class="text-red-500 underline font-semibold"
                                     href="{{ route('student.dashboard') }}">Reset</a>
+                            </div>
+                        @endif
+
+                        @if (Request::get('level') || Request::get('category'))
+                            <div class="flex items-center gap-2 mx-4">
+                                @if (Request::get('category'))
+                                    <x-badge
+                                        class="bg-blue-100 text-blue-500 px-2 font-semibold">{{ Request::get('category') }}</x-badge>
+                                @endif
+                                @if (Request::get('level'))
+                                    <x-badge
+                                        class="bg-pink-100 text-pink-500 px-2 font-semibold">{{ Request::get('level') }}</x-badge>
+                                @endif
+
+                                <a class="text-red-500 underline font-semibold"
+                                    href="{{ route('student.dashboard') }}">Reset Filter</a>
                             </div>
                         @endif
 
@@ -53,7 +69,7 @@
                         <x-modal name="cardModal" :show="$showModal" maxWidth="2xl">
 
                             <div class="p-4">
-                                <h2 class="text-2xl font-bold mb-4">Keranjang</h2>
+                                <h2 class="text-2xl font-bold mb-4">Cart</h2>
 
                                 @foreach ($cartItemsArray ?? [] as $items)
                                     <div class="flex flex-col gap-2">
@@ -62,8 +78,8 @@
                                                 <x-cart-card :item="$item"></x-cart-card>
                                             @endforeach
                                         @else
-                                            <div class="text-blue-500 font-medium text-lg text-center">Keranjang
-                                                kamu kosong...</div>
+                                            <div class="text-blue-500 font-medium text-lg text-center">Cart
+                                                empty...</div>
                                         @endif
 
                                     </div>
@@ -79,16 +95,16 @@
                                     <x-course-card :course="$course">
                                         <div class="flex items-center justify-between">
                                             <x-form-button :action="route('cart.add', ['course' => $course->id])"
-                                                class="p-2 bg-blue-200 text-blue-500 rounded-lg">
+                                                class="px-4 py-2 bg-blue-200 text-blue-500 rounded-lg">
                                                 <div class="flex items-center gap-2 w-full">
                                                     <x-bxs-cart class="w-5 h-5 hover:cursor-pointer" />
-                                                    <span>Tambah</span>
+                                                    <span>Add to Cart</span>
                                                 </div>
                                             </x-form-button>
                                             <x-form-button method="PATCH" :action="route('cart.checkout', ['course' => $course->id])"
-                                                class="p-2 w-full bg-blue-500 text-white rounded-lg">
+                                                class="px-4 py-2 w-full bg-blue-500 text-white rounded-lg">
                                                 <div class="flex items-center gap-2 w-full">
-                                                    <span>Beli Langsung</span>
+                                                    <span>Buy Course</span>
                                                 </div>
                                             </x-form-button>
                                         </div>
