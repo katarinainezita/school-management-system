@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Course;
 use App\Models\CourseStudent;
+use App\Models\Discussion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -61,5 +62,22 @@ class StudentController extends Controller
         $course = Course::where('slug', $slug)->first();
 
         return view('student.detail-course', compact('course'));
+    }
+
+    public function detailSection($slug, $module_order, $section_order)
+    {
+        $course = Course::where('slug', $slug)->first();
+
+
+        $moduleSelected = $course->modules()->select('id')->where('order', $module_order)->first();
+        $sectionSelected = $moduleSelected->sections()->select('id', 'title', 'content_id', 'order' , 'content_type')->where('order', $section_order)->first();
+
+        $discussion = Discussion::where('section_id', $sectionSelected->id)->get();
+
+        return view('student.detail-section', [
+            'course' => $course,
+            'section' => $sectionSelected,
+            'discussion' => $discussion
+        ]);
     }
 }

@@ -16,7 +16,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
-                            <a href="{{ route('student.mycourse') }}"> Back</a>
+                            <a href="{{ route('student.mycourse') }}"><i data-feather="arrow-left-circle"></i></a>
 
                             <h1 class="text-4xl font-bold text-gray-800 mt-2">{{ $course->title }}</h1>
 
@@ -89,7 +89,7 @@
                                                             </x-badge>
                                                         </div>
 
-                                                        <a href="#"
+                                                        <a href="{{ route('student.section', ['slug' => $course->slug, 'module_order' => $module->order, 'section_order' => $section->order]) }}"
                                                             class="bg-blue-500 text-white font-bold px-4 py-2 hover:ring-2 hover:bg-blue-500 rounded-lg flex items-center gap-2">
                                                             Learn
                                                         </a>
