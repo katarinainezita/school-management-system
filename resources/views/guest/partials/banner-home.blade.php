@@ -1,4 +1,4 @@
-<div class="w-full h-[500px] bg-slate-300 py-10 px-40">
+<div class="w-full h-[450px] bg-slate-300 py-10 px-40">
     <div class="border-2 rounded-xl w-full h-full bg-gray-300 bg-no-repeat bg-cover bg-blend-soft-light" style="background-image: url({{ asset('storage/img/assets/study.jpeg') }})">
         {{-- <img src="{{ asset('storage/img/assets/study.jpeg') }}" alt="banner-picture" class="w-full h-full object-cover rounded-xl opacity-50"> --}}
 

@@ -10,7 +10,7 @@ use App\Models\Section;
 use App\Models\Student;
 use App\Models\WorkingExperience;
 use App\Models\Article;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -59,6 +59,12 @@ class CourseSeeder extends Seeder
                     ['lecturer_id' => 10],
                 )
                 ->create();
+        
+        DB::table('top_courses')->insert([
+            ['course_id' => 1],
+            ['course_id' => 2],
+            ['course_id' => 3],
+        ]);
         // DB::table('courses')->insert([
         //     'name' => 'Mathematics',
         //     'teacher' => 'Frank Li',

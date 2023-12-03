@@ -3,6 +3,8 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use App\Models\Course;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,10 @@ use Illuminate\Support\Facades\Route;
 // }) -> name('guest.dashboard');
 
 Route::get('/', function () {
-    return view('guest.home');
+    $topCourses = DB::table('top_courses')->select('course_id')->get()->pluck('course_id');
+    $course = Course::whereIn('id', $topCourses)->get();
+
+    return view('guest.home', ['topCourses' => $course]);
 });
 
 Route::get('/courses', [CourseController::class, 'showCourses'])->name('guest.courses');
