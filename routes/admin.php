@@ -8,6 +8,6 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
-    Route::get('/courses', [AdminController::class, 'showCourses'])->name('admin.courses');
+    Route::get('/admin/courses', [AdminController::class, 'showCourses'])->name('admin.courses');
 });
 ?>

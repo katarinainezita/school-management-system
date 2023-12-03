@@ -19,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('guest.dashboard');
 // }) -> name('guest.dashboard');
 
-Route::get('/', [CourseController::class, 'showCourses'])->name('guest.courses');
+Route::get('/', function () {
+    return view('guest.home');
+});
+
+Route::get('/courses', [CourseController::class, 'showCourses'])->name('guest.courses');
 
 // Route::get('/student/dashboard', function () {
 //     return view('student.dashboard');
