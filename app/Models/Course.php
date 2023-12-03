@@ -13,7 +13,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'title',
         'description',
         'category',
@@ -26,6 +26,24 @@ class Course extends Model
         'verified',
         'draft'
     ];
+
+    protected $with = [
+        'lecturer',
+    ];
+
+    public static function searchWithFilter($query, $category, $level)
+    {
+        return self::where(function ($queryBuilder) use ($query) {
+            $queryBuilder->where('title', 'like', "%$query%")
+                ->orWhere('description', 'like', "%$query%");
+        })
+            ->when($category, function ($queryBuilder) use ($category) {
+                $queryBuilder->where('category', $category);
+            })->when($level, function ($queryBuilder) use ($level) {
+                $queryBuilder->where('level', $level);
+            })
+            ->get();
+    }
 
     public function students(): BelongsToMany
     {

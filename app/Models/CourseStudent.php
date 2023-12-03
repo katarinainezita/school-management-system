@@ -22,6 +22,11 @@ class CourseStudent extends Model
         'rating'
     ];
 
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
     public function completedSections(): HasMany
     {
         return $this->hasMany(CompletedSection::class);
