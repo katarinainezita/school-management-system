@@ -12,8 +12,8 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('lecturer.dashboard')" :active="request()->routeIs('/lecturer/dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('guest.courses')" :active="request()->routeIs('/courses')">
+                        {{ __('Courses') }}
                     </x-nav-link>
                 </div>
             </div>
