@@ -25,8 +25,7 @@
                             <div class="flex justify-between items-center p-4 mb-4">
                                 <h1 class="text-2xl font-bold">{{ __('Course') }}</h1>
 
-                                <button x-on:click="$dispatch('open-modal', 'cardModal')"> <x-bxs-cart
-                                        class="w-10 h-10 hover:cursor-pointer" />
+                                <button x-on:click="$dispatch('open-modal', 'cardModal')">
 
                                     @if ($cartItemsArray['data'] ?? false)
                                         <div class="rounded-full bg-red-500 text-white">
@@ -97,7 +96,7 @@
                                             <x-form-button :action="route('cart.add', ['course' => $course->id])"
                                                 class="px-4 py-2 bg-blue-200 text-blue-500 rounded-lg">
                                                 <div class="flex items-center gap-2 w-full">
-                                                    <x-bxs-cart class="w-5 h-5 hover:cursor-pointer" />
+
                                                     <span>Add to Cart</span>
                                                 </div>
                                             </x-form-button>

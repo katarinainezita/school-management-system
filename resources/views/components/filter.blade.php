@@ -3,8 +3,8 @@
 
     <x-dropdown>
         <x-slot name="trigger">
-            <x-button class="bg-red-500">
-                <x-fas-filter class="w-6 h-6" />
+            <x-button>
+                Filter
             </x-button>
         </x-slot>
 

@@ -3,7 +3,7 @@
     <div class="flex mb-2 p-2">
         <button
             class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-gray-900 w-7 h-7 text-center"
-            x-on:click="open=!open" type="button"><x-heroicon-o-arrow-right-circle /></button>
+            x-on:click="open=!open" type="button">x</button>
     </div>
     <ul class="space-y-2 font-medium my-1">
         <li>
