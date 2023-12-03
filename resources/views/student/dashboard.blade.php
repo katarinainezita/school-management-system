@@ -17,17 +17,13 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="px-4 text-gray-900 dark:text-gray-100">
-
-
-
-
-
                             <div class="flex justify-between items-center p-4 mb-4">
                                 <h1 class="text-2xl font-bold">{{ __('Course') }}</h1>
 
                                 <button x-on:click="$dispatch('open-modal', 'cardModal')">
-
+                                    <i data-feather="shopping-cart"></i>
                                     @if ($cartItemsArray['data'] ?? false)
+
                                         <div class="rounded-full bg-red-500 text-white">
                                             {{ count($cartItemsArray['data']) }}
                                     @endif

@@ -4,7 +4,7 @@
     <x-dropdown>
         <x-slot name="trigger">
             <x-button>
-                Filter
+                <i data-feather="filter"></i>
             </x-button>
         </x-slot>
 
