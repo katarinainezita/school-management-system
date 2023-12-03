@@ -1,7 +1,4 @@
 <div class="mt-8">
-    @php
-        $showModal = false;
-    @endphp
     <h3 class="text-xl font-semibold">Discussion with : <span class="text-blue-500">{{ $course->lecturer->name }}</span>
     </h3>
 

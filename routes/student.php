@@ -16,7 +16,5 @@ Route::middleware(['auth', 'verified', 'student'])->group(function () {
 
     Route::get("/student/section/{slug}/{module_order}/{section_order}", [StudentController::class, 'detailSection'])->name('student.section');
     
-    Route::post("/discussion/send", [DiscussionController::class, 'send'])->name('discussion.send');
-    Route::post("/reply/send", [DiscussionController::class, 'reply'])->name('reply.send');
     
 });

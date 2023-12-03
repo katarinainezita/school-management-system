@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -48,8 +49,13 @@ Route::middleware(['auth', 'student'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-require __DIR__.'/student.php';
-require __DIR__.'/admin.php';
-require __DIR__.'/lecturer.php';
-require __DIR__.'/course.php';
+Route::middleware(['auth'])->group(function () {
+    Route::post("/discussion/send", [DiscussionController::class, 'send'])->name('discussion.send');
+    Route::post("/reply/send", [DiscussionController::class, 'reply'])->name('reply.send');
+});
+
+require __DIR__ . '/auth.php';
+require __DIR__ . '/student.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/lecturer.php';
+require __DIR__ . '/course.php';

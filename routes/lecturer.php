@@ -15,6 +15,7 @@ Route::middleware(['auth', 'verified', 'lecturer'])->group(function () {
     })->name('lecturer.discussions');
 
     Route::get('/lecturer/discussions', function () {
+        
         return view('lecturer.dashboard');
     })->name('lecturer.discussions');
 
