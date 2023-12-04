@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Route;
 Route::patch("/verify", [CourseController::class, 'verify'])
     ->middleware('auth', 'admin')->name('course.verify');
 
+Route::post("/reject", [CourseController::class, 'reject'])
+    ->middleware('auth', 'admin')->name('course.reject');
+
+Route::patch("/submit/{slug}", [CourseController::class, 'submit'])
+    ->middleware('auth', 'lecturer', 'course.edit')->name('course.submit');
+
+Route::patch("/draft/{slug}", [CourseController::class, 'draft'])
+    ->middleware('auth', 'lecturer', 'course.edit')->name('course.draft');
+
 Route::post('/new', [CourseController::class, 'new'])
     ->middleware('auth', 'lecturer')->name('course.new');
 
@@ -53,7 +62,7 @@ Route::middleware(['auth', 'lecturer', 'course.edit'])->group(function () {
         ->name('section.edit');
 });
 
-Route::middleware(['auth', 'lecturer', 'course.learn'])->group(function () {
+Route::middleware(['auth', 'course.learn'])->group(function () {
     Route::get('/learn/{slug}/{module_order}/{section_order}', [CourseController::class, 'showContent'])
         ->name('course.learn');
 });

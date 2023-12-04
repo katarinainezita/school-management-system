@@ -16,6 +16,7 @@
         </div>
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 h-36">
             {{ Str::limit($course->description, 150) ?? 'Course Descirption' }}</p>
+        
         {{ $slot }}
     </div>
 </div>

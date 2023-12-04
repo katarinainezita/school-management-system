@@ -10,7 +10,7 @@ class CoursesRejected extends Model
 {
     use HasFactory;
 
-    protected $table = 'course_rejecteds';
+    protected $table = 'courses_rejecteds';
 
     protected $fillable = [
         'message'

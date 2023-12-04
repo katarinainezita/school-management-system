@@ -39,7 +39,7 @@
             
                                     {{-- type of section --}}
                                     {{-- article --}}
-                                    @if(!$section->isArticle())
+                                    @if($section->isArticle())
                                     <div class="flex ml-3">
                                         <img src="{{ asset('storage/img/assets/articles-icon.png') }}" alt="article-icon" class="w-[15px] h-fit me-2">
                                         <h3 class="text-xs font-thin">Article</h3>

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('message');
             $table->boolean('read_status')->default(false); // read status by lecturer
             $table->foreignIdFor(Course::class);
-            $table->foreignIdFor(Admin::class);
             $table->timestamps();
         });
     }
