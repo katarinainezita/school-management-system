@@ -12,14 +12,14 @@ class Discussion extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'comment'
+    protected $guarded = [
+        'id'
     ];
 
-    protected $guarded = [
-        'owner_id',
-        'owner_type'
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 
     public function section(): BelongsTo
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Discussion;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -105,9 +106,12 @@ class CourseController extends Controller
         $moduleSelected = $course->modules()->select('id')->where('order', $module_order)->first();
         $sectionSelected = $moduleSelected->sections()->select('id', 'title', 'content_id', 'content_type')->where('order', $section_order)->first();
 
+        $discussion = Discussion::where('section_id', $sectionSelected->id)->get();
+
         return view('course.learn', [
             'course' => $course,
-            'sectionSelected' => $sectionSelected
+            'section' => $sectionSelected,
+            'discussion' => $discussion
         ]);
     }
 }

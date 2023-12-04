@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,5 +13,8 @@ Route::middleware(['auth', 'verified', 'student'])->group(function () {
     Route::get("/student/my-course", [StudentController::class, 'myCourse'])->name('student.mycourse');
 
     Route::get("/student/course/{slug}", [StudentController::class, 'detail'])->name('student.detail');
+
+    Route::get("/student/section/{slug}/{module_order}/{section_order}", [StudentController::class, 'detailSection'])->name('student.section');
+    
     
 });

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('comment');
             $table->integer('owner_id');
-            $table->integer('owner_type');
+            $table->string('owner_type');
             $table->foreignIdFor(Section::class);
             $table->timestamps();
         });

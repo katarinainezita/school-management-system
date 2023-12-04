@@ -4,12 +4,13 @@
             <h1 class="text-3xl font-semibold text-center">Top Course Last Month</h1>
         </div>
         <div class="grid grid-cols-3 gap-4">
-            @foreach($topCourses as $course)
-            <div max-h-[20px]>
-                <x-course-card :course="$course">
-                    <h1>x new students</h1>
-                </x-course-card>
-            </div>
+            @foreach ($topCourses as $course)
+                <div max-h-[20px]>
+                    <x-course-card :course="$course">
+
+                        <h1>{{ count($course->courseStudent) }} new students</h1>
+                    </x-course-card>
+                </div>
             @endforeach
         </div>
     </div>

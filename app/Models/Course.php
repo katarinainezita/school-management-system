@@ -50,6 +50,10 @@ class Course extends Model
         return $this->belongsToMany(Student::class)->wherePivotIn('status', ['learning progress', 'completed'])->withPivot('review', 'rating');
     }
 
+    public function courseStudent() {
+        return $this->hasMany(CourseStudent::class);
+    }
+
     public function isStudent($id): bool
     {
         return $this->students()->select('id')->find($id) != null;

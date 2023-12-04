@@ -11,13 +11,9 @@ class Reply extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'comment'
-    ];
-
     protected $guarded = [
-        'owner_id',
-        'owner_type'
+        'id',
+
     ];
 
     public function discussion(): BelongsTo
@@ -28,5 +24,9 @@ class Reply extends Model
     public function owner(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 }
