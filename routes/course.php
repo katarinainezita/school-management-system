@@ -13,6 +13,12 @@ Route::patch("/verify", [CourseController::class, 'verify'])
 Route::post("/reject", [CourseController::class, 'reject'])
     ->middleware('auth', 'admin')->name('course.reject');
 
+Route::patch("/submit/{slug}", [CourseController::class, 'submit'])
+    ->middleware('auth', 'lecturer', 'course.edit')->name('course.submit');
+
+Route::patch("/draft/{slug}", [CourseController::class, 'draft'])
+    ->middleware('auth', 'lecturer', 'course.edit')->name('course.draft');
+
 Route::post('/new', [CourseController::class, 'new'])
     ->middleware('auth', 'lecturer')->name('course.new');
 

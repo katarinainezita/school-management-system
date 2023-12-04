@@ -19,7 +19,7 @@ class EnsureCourseLearningAuthorization
     {
         $slug = $request->route('slug');
         $course = Course::where('slug', $slug)->firstOrFail();
-        $userProfile = Auth::user()->role()->first();
+        $userProfile = Auth::user()->role->first();
 
         // if course not found
         if($course == null) 
@@ -30,7 +30,7 @@ class EnsureCourseLearningAuthorization
         // if lecturer and is not their course
         if(Auth::user()->isLecturer())
         {
-            if(!$course->isLecturer(Auth::user()->lecturer->id))
+            if(!$course->isLecturer(Auth::user()->role->id))
             {
                 abort(403, 'You are not allowed to open this course');
             }

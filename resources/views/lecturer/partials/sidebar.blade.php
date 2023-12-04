@@ -10,25 +10,37 @@
             </a>
          </li>
          <li>
-            <a href="{{ route('lecturer.courses') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="{{ route('lecturer.courses', ['page' => 1]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <img src="{{ asset('storage/img/assets/course-icon.png') }}" alt="icon-courses" class="w-7 h-7">
-               <span x-show="open" class="ml-3 mr-5">Courses</span>
+               <span x-show="open" class="ml-3 mr-5">Available Courses</span>
             </a>
          </li>
          <li>
-            <a href="{{ route('lecturer.discussions') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="{{ route('lecturer.draft-courses', ['page' => 1]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+               <img src="{{ asset('storage/img/assets/draft-icon.png') }}" alt="icon-courses" class="w-7 h-7">
+               <span x-show="open" class="ml-3 mr-5">Draft Courses</span>
+            </a>
+         </li>
+         <li>
+            <a href="{{ route('lecturer.submitted-courses', ['page' => 1]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+               <img src="{{ asset('storage/img/assets/submit-icon.png') }}" alt="icon-courses" class="w-7 h-7">
+               <span x-show="open" class="ml-3 mr-5">Submitted Courses</span>
+            </a>
+         </li>
+         <li>
+            <a href="{{ route('lecturer.discussions', ['page' => 1]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <img src="{{ asset('storage/img/assets/discussion-icon.png') }}" alt="icon-discussions" class="w-7 h-7">
                <span x-show="open" class="ml-3 mr-5">Discussion</span>
             </a>
          </li>
          <li>
-            <a href="{{ route('lecturer.review') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="{{ route('lecturer.reviews', ['page' => 1]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <img src="{{ asset('storage/img/assets/review-icon.png') }}" alt="icon-review" class="w-7 h-7">
                <span x-show="open" class="ml-3 mr-5">Reviews</span>
             </a>
          </li>
          <li>
-            <a href="{{ route('lecturer.rejection') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="{{ route('lecturer.rejections', ['page' => 1]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <img src="{{ asset('storage/img/assets/rejection-icon.png') }}" alt="icon-rejections" class="w-7 h-7">
                <span x-show="open" class="ml-3 mr-5">Rejections</span>
             </a>
