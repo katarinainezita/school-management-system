@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -42,14 +43,19 @@ Route::get('/courses', [CourseController::class, 'showCourses'])->name('guest.co
 //     return view('lecturer.dashboard');
 // })->middleware(['auth', 'verified', 'lecturer'])->name('lecturer.dashboard');
 
-Route::middleware(['auth', 'student'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-require __DIR__.'/student.php';
-require __DIR__.'/admin.php';
-require __DIR__.'/lecturer.php';
-require __DIR__.'/course.php';
+Route::middleware(['auth'])->group(function () {
+    Route::post("/discussion/send", [DiscussionController::class, 'send'])->name('discussion.send');
+    Route::post("/reply/send", [DiscussionController::class, 'reply'])->name('reply.send');
+});
+
+require __DIR__ . '/auth.php';
+require __DIR__ . '/student.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/lecturer.php';
+require __DIR__ . '/course.php';
