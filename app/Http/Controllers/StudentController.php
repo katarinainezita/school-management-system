@@ -26,7 +26,7 @@ class StudentController extends Controller
 
         $courses = Course::searchWithFilter($query, $category, $level);
 
-        $cartItems = Cart::where('student_id', Auth::user()->student->id)->first('data');
+        $cartItems = Cart::where('student_id', Auth::user()->role->id)->first('data');
 
         $cartItemsArray = json_decode($cartItems, true);
 
@@ -39,7 +39,7 @@ class StudentController extends Controller
         $category = $request->input('category');
         $level = $request->input('level');
 
-        $courseStudent = CourseStudent::where('student_id', Auth::user()->student->id)->get();
+        $courseStudent = CourseStudent::where('student_id', Auth::user()->role->id)->get();
         $courses = [];
 
         foreach ($courseStudent as $course) {
