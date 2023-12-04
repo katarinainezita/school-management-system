@@ -22,42 +22,12 @@
                                 @endif
                             @endif
 
-                            @if (count($unverifiedCourses) > 0)
-                                <h1 class="font-bold text-2xl text-red-500 mt-5">Unverified Courses</h1>
+                            @if (count($courses) > 0)
+                                <h1 class="font-bold text-2xl text-red-500 mt-5">Available Courses</h1>
                                 <div class="grid grid-cols-3 gap-7 mt-10 justify-between">
-                                    @foreach ($unverifiedCourses as $course)
-                    
+                                    @foreach ($courses as $course)
+
                                         <div class="w-fit mb-5">
-                                            <x-course-card :course="$course" >
-                                                <div class="flex justify-between">
-                                                    <a href="#"
-                                                        class="px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                        Detail
-                                                    </a>
-                                                    <form method="POST" action="{{ route('course.verify') }}">
-                                                        @method('PATCH')
-                                                        @csrf
-                                                        <input type="hidden" name="course_id"
-                                                            value="{{ $course->id }}">
-                                                        <button type="submit"
-                                                            class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                            Verify
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </x-course-card>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            <hr class="h-px my-10 bg-gray-200 border-0 dark:bg-gray-700">
-
-                            @if (count($verifiedCourses) > 0)
-                                <h1 class="font-bold text-2xl text-blue-500 mt-5">Verified Courses</h1>
-                                <div class="grid grid-cols-3 gap-7 mt-10 justify-between">
-                                    @foreach ($verifiedCourses as $course)
-                                        <div class="w-fit mb-10">
                                             <x-course-card :course="$course"></x-course-card>
                                         </div>
                                     @endforeach

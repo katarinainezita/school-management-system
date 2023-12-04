@@ -25,7 +25,27 @@ class CourseController extends Controller
         $data['email'] = 'thoriq.afif.habibi@gmail.com';
         dispatch(new SendEmailJob($data));
 
-        return redirect(route('admin.courses'))->with(['status' => 'success']);
+        return redirect(route('admin.proposal.courses', ['page' => 1]))->with(['status' => 'success']);
+    }
+
+    public function reject(Request $request)
+    {
+        $request->validate([
+            'notes' => 'required',
+        ]);
+
+        $unverifiedCourse = Course::find($request->course_id);
+        $unverifiedCourse->draft = true;
+        $unverifiedCourse->rejections()->create([
+            'message' => $request->notes
+        ]);
+        $unverifiedCourse->save();
+
+        // send email to lecturer
+        $data['email'] = 'thoriq.afif.habibi@gmail.com';
+        dispatch(new SendEmailJob($data));
+
+        return redirect(route('admin.proposal.courses', ['page' => 1]));
     }
 
     public function new(Request $request)

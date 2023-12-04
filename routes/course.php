@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Route;
 Route::patch("/verify", [CourseController::class, 'verify'])
     ->middleware('auth', 'admin')->name('course.verify');
 
+Route::post("/reject", [CourseController::class, 'reject'])
+    ->middleware('auth', 'admin')->name('course.reject');
+
 Route::post('/new', [CourseController::class, 'new'])
     ->middleware('auth', 'lecturer')->name('course.new');
 
