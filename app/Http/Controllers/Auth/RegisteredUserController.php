@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
@@ -53,7 +54,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'class' => $request->class,
+            // 'class' => $request->class,
             'date_of_birth' => $request->date_of_birth,
             'role_type' => $request->type,
             'profile_picture' => $request->profile_picture,
@@ -79,5 +80,82 @@ class RegisteredUserController extends Controller
         }
 
         return redirect(($route));
+    }
+
+    public function storeStudent(RegisterFormDataRequest $request): RedirectResponse
+    {
+        $request->validated();
+
+        if ($request->hasFile('profile_picture')) {
+            $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $request->profile_picture - $imagePath;
+        }
+
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        $user->role()->create([
+            'name' => $request->name,
+            'profilePicture' => $request->profile_picture,
+            'dateOfBirth' => $request->dateOfBirth,
+            'phoneNumber' => $request->phoneNumber,
+        ]);
+
+        return redirect(route('login'));
+    }
+
+    public function storeLecturer(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required',
+            'profile_picture' => 'required',
+            'dateOfBirth' => 'required',
+            'phoneNumber' => 'required',
+            'description' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($request->hasFile('profile_picture')) {
+            $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            // $request->profile_picture - $imagePath;
+        }
+
+        $lecturer = Lecturer::create([
+            'name' => $request->name,
+            'profilePicture' => $imagePath,
+            'dateOfBirth' => $request->dateOfBirth,
+            'phoneNumber' => $request->phoneNumber,
+            'description' => $request->description
+        ]);
+
+        $lecturer->user()->create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        // $user = $lecturer->user()->first();
+
+        // $user->role_id = $lecturer->id;
+
+        // $user = new User;
+        // $user->email = $request->email;
+        // $user->password = Hash::make($request->password);
+
+        // $user->role()->create([
+        //     'name' => $request->name,
+        //     // 'profilePicture' => $request->profile_picture,
+        //     'dateOfBirth' => $request->dateOfBirth,
+        //     'phoneNumber' => $request->phoneNumber,
+        //     'description' => $request->description
+        // ]);
+
+        return redirect(route('login'));
     }
 }

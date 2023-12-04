@@ -79,7 +79,7 @@ class CourseController extends Controller
         $course->level = $request->level;
         $course->slug = Str::slug($request->title);
 
-        $lecturer = Auth::user()->lecturer;
+        $lecturer = Auth::user()->role;
 
         $lecturer->courses()->save($course);
 

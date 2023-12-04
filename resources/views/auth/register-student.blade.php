@@ -6,10 +6,10 @@
         <a href="{{ route('register.lecturer') }}" type="button"
             class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-r-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Lecturer</a>
 
-        <form method="POST" action="{{ route('register.lecturer') }}">
+        <form method="POST" action="{{ route('register.student.submit') }}" enctype="multipart/form-data">
             @csrf
 
-            <input type="hidden" name="type" value="App\Models\Student">
+            <input type="hidden" id="type" name="type" value="App\Models\Student">
 
             <!-- Name -->
             <div>
@@ -27,28 +27,28 @@
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
-            <!-- Class -->
+            {{-- phone number --}}
             <div>
-                <x-input-label for="class" :value="__('Class')" />
-                <x-text-input id="class" class="block mt-1 w-full" type="text" name="class" :value="old('class')"
-                    required autofocus autocomplete="class" />
-                <x-input-error :messages="$errors->get('class')" class="mt-2" />
+                <x-input-label for="phoneNumber" :value="__('Phone Number')" />
+                <x-text-input id="phoneNumber" class="block mt-1 w-full" type="text" name="phoneNumber" :value="old('phoneNumber')"
+                    required autofocus autocomplete="name" />
+                <x-input-error :messages="$errors->get('phoneNumber')" class="mt-2" />
             </div>
 
             <!-- Date of Birth -->
             <div>
-                <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
-                <x-text-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth"
-                    :value="old('date_of_birth')" required autofocus autocomplete="bdate" />
-                <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
+                <x-input-label for="dateOfBirth" :value="__('Date of Birth')" />
+                <x-text-input id="dateOfBirth" class="block mt-1 w-full" type="date" name="dateOfBirth"
+                    :value="old('dateOfBirth')" required autofocus autocomplete="bdate" />
+                <x-input-error :messages="$errors->get('dateOfBirth')" class="mt-2" />
             </div>
 
             <!-- Profile Picture -->
             <div>
-                <x-input-label for="profile_picture" :value="__('Profile Picture')" />
-                <input id="profile_picture" type="file" class="block mt-1 w-full" name="profile_picture"
-                    accept="image/*" :value="old('profile_picture')" required />
-                <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
+                <x-input-label for="profilePicture" :value="__('Profile Picture')" />
+                <input id="profilePicture" type="file" class="block mt-1 w-full" name="profilePicture" accept="image/*"
+                    :value="old('profilePicture')" required />
+                <x-input-error :messages="$errors->get('profilePicture')" class="mt-2" />
             </div>
 
             <!-- Password -->
