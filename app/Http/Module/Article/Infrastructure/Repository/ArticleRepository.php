@@ -25,6 +25,11 @@ class ArticleRepository implements ArticleRepositoryInterface
                             ->update(['text' => $article->text]);
     }
 
+    public function delete(int $id)
+    {
+        DB::table('articles')->where('section_id', $id)->delete();
+    }
+
     public function getAllArticles()
     {
         return DB::table('articles')->get();

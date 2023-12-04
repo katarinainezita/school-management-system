@@ -8,6 +8,8 @@ use App\Http\Module\Article\Application\Services\GetArticleRequest;
 use App\Http\Module\Article\Application\Services\GetArticleService;
 use App\Http\Module\Article\Application\Services\EditArticleRequest;
 use App\Http\Module\Article\Application\Services\EditArticleService;
+use App\Http\Module\Article\Application\Services\DeleteArticleRequest;
+use App\Http\Module\Article\Application\Services\DeleteArticleService;
 use App\Http\Module\Article\Domain\Model\Article;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,8 @@ class ArticleController
     public function __construct(
         private CreateArticleService $create_article_service,
         private GetArticleService $getArticleService,
-        private EditArticleService $edit_article_service
+        private EditArticleService $edit_article_service,
+        private DeleteArticleService $delete_article_service
     ) {
     }
 
@@ -40,6 +43,17 @@ class ArticleController
         );
 
         $this->edit_article_service->execute($request);
+
+        return redirect()->back();
+    }
+
+    public function deleteArticle(Request $request)
+    {
+        $request = new DeleteArticleRequest(
+            $request['section_id'],
+        );
+
+        $this->delete_article_service->execute($request);
 
         return redirect()->back();
     }
