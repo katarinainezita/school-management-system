@@ -13,8 +13,11 @@ use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
+    
+    // Untuk menampilkan card course di dashboard
     public function index(Request $request)
     {
+        // Search & Filter from url
         $query = $request->input('query');
 
         $category = $request->input('category');

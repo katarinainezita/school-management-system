@@ -11,12 +11,12 @@
               @csrf
               @method('PATCH')
 
-              <input type="hidden" name="id" value="{{ $sectionSelected->video->id }}">
+              <input type="hidden" name="id" value="{{ $section->video->id }}">
 
               <div class="p-5">
                   <div class="mb-6">
                       <x-label-form for="video" textSize="text-lg" fontWeight="font-bold">Video URL</x-label-form>
-                      <x-text-input class="w-full" type="text" value="{{ $sectionSelected->video->video }}" id="video" name="video"
+                      <x-text-input class="w-full" type="text" value="{{ $section->video->video }}" id="video" name="video"
                           placeholder="Video URL" required></x-text-input>
                   </div>
 

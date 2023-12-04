@@ -10,7 +10,7 @@
           <form action="{{ route('video.store') }}" method="POST">
               @csrf
 
-              <input type="hidden" name="section_id" value="{{ $sectionSelected->id }}">
+              <input type="hidden" name="section_id" value="{{ $section->id }}">
 
               <div class="p-5">
                   <div class="mb-6">
