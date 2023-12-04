@@ -53,7 +53,7 @@ Route::middleware(['auth', 'lecturer', 'course.edit'])->group(function () {
         ->name('section.edit');
 });
 
-Route::middleware(['auth', 'lecturer', 'course.learn'])->group(function () {
+Route::middleware(['auth', 'course.learn'])->group(function () {
     Route::get('/learn/{slug}/{module_order}/{section_order}', [CourseController::class, 'showContent'])
         ->name('course.learn');
 });

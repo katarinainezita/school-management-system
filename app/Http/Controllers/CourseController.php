@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
 
 class CourseController extends Controller
 {
@@ -17,6 +20,10 @@ class CourseController extends Controller
         $unverifiedCourse = Course::find($request->course_id);
         $unverifiedCourse->verified = true;
         $unverifiedCourse->save();
+
+        // send email to lecturer
+        $data['email'] = 'thoriq.afif.habibi@gmail.com';
+        dispatch(new SendEmailJob($data));
 
         return redirect(route('admin.courses'))->with(['status' => 'success']);
     }

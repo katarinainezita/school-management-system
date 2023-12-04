@@ -9,7 +9,7 @@ class LecturerController extends Controller
     //
     public function showCourses()
     {
-        $courses = Auth::user()->lecturer->courses;
+        $courses = Auth::user()->role->courses;
 
         return view('lecturer.courses', compact('courses'));
     }
