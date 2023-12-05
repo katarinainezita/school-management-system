@@ -12,10 +12,10 @@ class CartController extends Controller
 {
     public function add(Request $request)
     {
-        $studentId = Auth::user()->role->id;
+        $studentId = Auth::user()->student->id;
         $course = Course::find($request->course);
         $courseId = $course->id;
-        $cart = Cart::where('student_id', Auth::user()->role->id)->first();
+        $cart = Cart::where('student_id', Auth::user()->student->id)->first();
 
         $alreadyBuyCourse = CourseStudent::where('student_id', $studentId)->where('course_id', $courseId)->first();
 
@@ -26,7 +26,7 @@ class CartController extends Controller
 
         if (!$cart) {
             $cart = Cart::create([
-                'student_id' => Auth::user()->role->id,
+                'student_id' => Auth::user()->student->id,
                 'courses' => [],
             ]);
         }
@@ -50,7 +50,7 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        $studentId = Auth::user()->role->id;
+        $studentId = Auth::user()->student->id;
         $courseIdToRemove = $request->course;
         $course = Course::find($courseIdToRemove);
         $cart = Cart::where('student_id', $studentId)->first();
@@ -77,7 +77,7 @@ class CartController extends Controller
         }
 
         CourseStudent::create([
-            'student_id' => Auth::user()->role->id,
+            'student_id' => Auth::user()->student->id,
             'course_id' => $courseIdToRemove
         ]);
 
