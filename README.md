@@ -99,6 +99,6 @@ c. Buka Browser
 Buka browser dan akses http://127.0.0.1:8000/ untuk melihat website.
 
 ## Result
-<img width="1274" alt="image" src="https://github.com/katarinainezita/school-management-system/assets/109232320/a13db56d-229b-4cf0-9281-c995f419c5ab">
+<img width="909" alt="image" src="https://github.com/katarinainezita/school-management-system/assets/109232320/15ef4e97-081b-453e-87be-daeed73348c9">
 
 
