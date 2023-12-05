@@ -74,6 +74,30 @@
 
 1. Setelah pembelian, siswa dapat mengakses kursus yang telah dibeli.
 
+
+## Cara Menjalankan Proyek
+a. Instalasi Dependensi
+
+```
+npm install
+```
+
+b. Menjalankan Server
+
+```
+npm run dev
+```
+
+dan
+
+```
+php artisan serve
+```
+
+c. Buka Browser
+
+Buka browser dan akses http://127.0.0.1:8000/ untuk melihat website.
+
 ## Result
 <img width="1274" alt="image" src="https://github.com/katarinainezita/school-management-system/assets/109232320/a13db56d-229b-4cf0-9281-c995f419c5ab">
 
