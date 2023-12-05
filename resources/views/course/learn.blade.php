@@ -1,5 +1,28 @@
 <x-app-layout>
     <div class="relative" x-data="{ openSidebar: true }">
+        {{-- message --}}
+        <div class="absolute top-[10px] w-full">
+            @if (session('status'))
+                <div class="flex items-center justify-center">
+                    @if (session('status') == 'success')
+                        <x-success-alert>{{ session('message') }}</x-success-alert>
+                    @elseif (session('status') == 'fail')
+                        <x-warning-alert>{{ session('message') }}</x-warning-alert>
+                    @endif
+                </div>
+            @endif
+    
+            @if($errors->any())
+                <div class="flex items-center justify-center">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li><x-warning-alert>{{ $error }}</x-warning-alert></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
+
         {{-- sidebar --}}
         @include('course.partials.sidebar')
 

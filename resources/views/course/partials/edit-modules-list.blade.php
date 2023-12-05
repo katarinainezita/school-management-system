@@ -68,6 +68,31 @@
                         <div class="relative" x-data="{editSection:false, deleteSection:false}">
 
                             @if($mode == 'edit')
+                            {{-- edit button --}}
+                            <button class="absolute top-2 right-5 w-[10px] h-fit" x-on:click="editSection = !editSection">
+                                <img src="{{ asset('/storage/img/assets/pencil-icon.jpg') }}" alt="delete-icon">
+                            </button>
+                            <template x-if="editSection">
+                                <x-modal name="Edit Section" show="true">
+                                    <form action="{{ route('section.edit', ['slug' => $course->slug, 'module_id' => $module->id, 'section_id' => $section->id]) }}" method="post">
+                                        @csrf
+                                        @method('patch')
+                                        <div class="p-5">
+                                            {{-- Title --}}
+                                            <div class="mb-6">
+                                                <x-label-form for="title" textSize="text-lg" fontWeight="font-bold">Section Title</x-label-form>
+                                                <x-input-form type="text" id="title" name="title" placeholder="" required="required"></x-input-form>
+                                            </div>
+        
+                                            <div class="flex justify-between">
+                                                <x-button variable="editSection">cancel</x-button>
+                                                <x-button type="submit">edit</x-button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </x-modal>
+                            </template>
+
                             {{-- delete button --}}
                             <button class="absolute top-2 right-0 w-[10px] h-fit" x-on:click="deleteSection = !deleteSection">
                                 <img src="{{ asset('/storage/img/assets/minus-icon.png') }}" alt="delete-icon">

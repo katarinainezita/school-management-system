@@ -13,6 +13,11 @@ class ModuleController extends Controller
     // add new module
     public function new(Request $request, $slug): RedirectResponse
     {
+        $request->validate([
+            'title' => 'required|alpha',
+            'numOfSections' => 'required|integer|gte:1'
+        ]);
+
         $course = Course::where('slug', $slug)->firstOrFail();
         $module = new Module;
 
@@ -53,6 +58,10 @@ class ModuleController extends Controller
 
     public function editModuleTitle(Request $request, $slug, $module_id): RedirectResponse
     {
+        $request->validate([
+            'module_title' => 'required|string',
+        ]);
+
         $module = Module::find($module_id);
         $module->title = $request->module_title;
         $module->save();

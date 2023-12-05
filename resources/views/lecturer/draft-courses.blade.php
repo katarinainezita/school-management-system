@@ -12,15 +12,27 @@
             <div class="py-12 ">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                            @if (session('status'))
-                                @if (session('status') == 'success')
-                                    <x-success-alert> Course has been submitted </x-success-alert>
+                        <div class="p-6 text-gray-900 dark:text-gray-100 relative">
+                            {{-- message --}}
+                                @if (session('status'))
+                                    <div class="flex items-center justify-center">
+                                        @if (session('status') == 'success')
+                                            <x-success-alert>{{ session('message') }}</x-success-alert>
+                                        @elseif (session('status') == 'fail')
+                                            <x-warning-alert>{{ session('message') }} hwhw</x-warning-alert>
+                                        @endif
+                                    </div>
                                 @endif
-                                @if (session('status') == 'fail')
-                                    <x-warning-alert> Failed to submit course </x-warning-alert>
+                        
+                                @if($errors->any())
+                                    <div class="flex items-center justify-center">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li><x-warning-alert>{{ $error }}</x-warning-alert></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 @endif
-                            @endif
 
                             @include('lecturer.partials.add-course-form')
         

@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -82,44 +83,48 @@ class RegisteredUserController extends Controller
         return redirect(($route));
     }
 
-    public function storeStudent(RegisterFormDataRequest $request): RedirectResponse
+    public function storeStudent(Request $request): RedirectResponse
     {
-        $request->validated();
+        $request->validate([
+            'name' => 'required|string|max:300',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg',
+            'dateOfBirth' => 'required|date',
+            'phoneNumber' => 'required|string|max:20',
+            'email' => 'required|email',
+            'password' => ['required', Password::min(8)]
+        ]);
+
 
         if ($request->hasFile('profile_picture')) {
             $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
-            $request->profile_picture - $imagePath;
+            // $request->profile_picture - $imagePath;
         }
 
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        $user->role()->create([
+        $student = Student::create([
             'name' => $request->name,
-            'profilePicture' => $request->profile_picture,
+            'photo' => $imagePath,
             'dateOfBirth' => $request->dateOfBirth,
-            'phoneNumber' => $request->phoneNumber,
+            'phoneNumber' => '111',
         ]);
 
-        return redirect(route('login'));
+        $student->user()->create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect((route('login')));
     }
 
     public function storeLecturer(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required',
-            'profile_picture' => 'required',
-            'dateOfBirth' => 'required',
-            'phoneNumber' => 'required',
-            'description' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'name' => 'required|string|max:300',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg',
+            'dateOfBirth' => 'required|date',
+            'phoneNumber' => 'required|string|max:20',
+            'description' => 'required|string',
+            'email' => 'required|email',
+            'password' => ['required', Password::min(8)]
         ]);
 
         if ($request->hasFile('profile_picture')) {
@@ -129,32 +134,16 @@ class RegisteredUserController extends Controller
 
         $lecturer = Lecturer::create([
             'name' => $request->name,
-            'profilePicture' => $imagePath,
-            'dateOfBirth' => $request->dateOfBirth,
             'phoneNumber' => $request->phoneNumber,
-            'description' => $request->description
+            'description' => $request->description,
+            'dateOfBirth' => $request->dateOfBirth,
+            'photo' => $imagePath,
         ]);
 
         $lecturer->user()->create([
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-
-        // $user = $lecturer->user()->first();
-
-        // $user->role_id = $lecturer->id;
-
-        // $user = new User;
-        // $user->email = $request->email;
-        // $user->password = Hash::make($request->password);
-
-        // $user->role()->create([
-        //     'name' => $request->name,
-        //     // 'profilePicture' => $request->profile_picture,
-        //     'dateOfBirth' => $request->dateOfBirth,
-        //     'phoneNumber' => $request->phoneNumber,
-        //     'description' => $request->description
-        // ]);
 
         return redirect(route('login'));
     }

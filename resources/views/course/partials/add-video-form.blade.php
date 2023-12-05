@@ -7,15 +7,15 @@
   </x-list-item-button>
   <template x-if="openModal">
       <x-modal name="Add Video" show="true">
-          <form action="{{ route('video.store') }}" method="POST">
+          <form action="{{ route('video.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
 
-              <input type="hidden" name="section_id" value="{{ $sectionSelected->id }}">
+              <input type="hidden" name="section_id" value="{{ $section->video->id }}">
 
               <div class="p-5">
                   <div class="mb-6">
-                      <x-label-form for="video" textSize="text-lg" fontWeight="font-bold">Video URL</x-label-form>
-                      <x-text-input class="w-full" type="text" id="video" name="video"
+                      <x-label-form for="video" textSize="text-lg" fontWeight="font-bold">Upload Video</x-label-form>
+                      <x-text-input class="w-full" type="file" id="video" name="video"
                           placeholder="Video URL" required></x-text-input>
                   </div>
 

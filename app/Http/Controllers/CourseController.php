@@ -12,12 +12,16 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
     //
     public function verify(Request $request): RedirectResponse
     {
+        $request->validate([
+            'course_id' => 'required|integer',
+        ]);
         $unverifiedCourse = Course::find($request->course_id);
         $unverifiedCourse->verified = true;
         $unverifiedCourse->save();
@@ -26,16 +30,13 @@ class CourseController extends Controller
         $data['email'] = 'thoriq.afif.habibi@gmail.com';
         dispatch(new SendEmailJob($data));
 
-        // send email to students if it's edit course
-
-
-        return redirect(route('admin.proposal.courses', ['page' => 1]))->with(['status' => 'success']);
+        return redirect(route('admin.proposal.courses', ['page' => 1]))->with(['status' => 'success', 'message' => 'Course has been verified']);
     }
 
     public function reject(Request $request)
     {
         $request->validate([
-            'notes' => 'required',
+            'notes' => 'required|string',
         ]);
 
         $unverifiedCourse = Course::find($request->course_id);
@@ -49,16 +50,19 @@ class CourseController extends Controller
         $data['email'] = 'thoriq.afif.habibi@gmail.com';
         dispatch(new SendEmailJob($data));
 
-        return redirect(route('admin.proposal.courses', ['page' => 1]));
+        return redirect(route('admin.proposal.courses', ['page' => 1]))->with(['status' => 'success', 'message' => 'Course rejection success']);
     }
 
     public function submit(Request $request)
     {
+        $request->validate([
+            'course_id' => 'required|integer',
+        ]);
         $course = Course::find($request->course_id);
         $course->draft = false;
         $course->save();
 
-        return redirect(route('lecturer.draft-courses', ['page' => 1]))->with(['status' => 'success']);
+        return redirect(route('lecturer.draft-courses', ['page' => 1]))->with(['status' => 'success', 'message' => 'Course has been submitted']);
     }
 
     public function draft($slug)
@@ -72,6 +76,12 @@ class CourseController extends Controller
 
     public function new(Request $request)
     {
+        $request->validate([
+            'title' => 'required|unique:App\Models\Course,title',
+            'description' => 'required|',
+            'category' => ['required', Rule::in(['Front End', 'Backend', 'IoT', 'Android', 'iOs', 'Cybersecurity', 'Machine Learning'])],
+            'level' => ['required', Rule::in(['Basic', 'Intermediate', 'Advanced'])]
+        ]);
         $course = new Course;
         $course->title = $request->title;
         $course->description = $request->description;
@@ -83,7 +93,7 @@ class CourseController extends Controller
 
         $lecturer->courses()->save($course);
 
-        return redirect(route('course.edit', ['slug' => $course->slug]));
+        return redirect(route('course.edit', ['slug' => $course->slug]))->with(['status' => 'success', 'message' => 'Course successfully created']);
     }
 
     public function showDetailCourse($slug): View
@@ -109,14 +119,10 @@ class CourseController extends Controller
 
     public function editCourseTitle(Request $request, $slug): RedirectResponse
     {
-        $course = Course::where('slug', '=', $slug)->orWhere('title', '=', $request->course_title);
-
-        // check if title already used
-        if ($course->count() > 1) {
-            return redirect(route('course.edit', ['slug' => $slug]))->with(['status' => 'fail', 'message' => 'Cann\'t changed the title, duplicate title']);
-        }
-
-        $course = $course->first();
+        $request->validate([
+            'course_title' => 'required|unique:App\Models\Course,title'
+        ]);
+        $course = Course::where('slug', '=', $slug)->orWhere('title', '=', $request->course_title)->first();
         $course->title = $request->course_title;
         $course->save();
 
@@ -125,6 +131,9 @@ class CourseController extends Controller
 
     public function editCourseDesc(Request $request, $slug): RedirectResponse
     {
+        $request->validate([
+            'course_description' => 'required|string'
+        ]);
         $course = Course::where('slug', $slug)->firstOrFail();
         $course->description = $request->course_description;
         $course->save();

@@ -1,10 +1,33 @@
 <x-guest-layout>
-    <div class="" x-data="{ role: '' }">
+    <div class="relative" x-data="{ role: '' }">
         <a href="#" type="button"
             class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-l-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Student</a>
 
         <a href="{{ route('register.lecturer') }}" type="button"
             class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-r-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Lecturer</a>
+        
+        {{-- message --}}
+        <div class="absolute top-[2px] w-full">
+            @if (session('status'))
+                <div class="flex items-center justify-center">
+                    @if (session('status') == 'success')
+                        <x-success-alert>{{ session('message') }}</x-success-alert>
+                    @elseif (session('status') == 'fail')
+                        <x-warning-alert>{{ session('message') }} hwhw</x-warning-alert>
+                    @endif
+                </div>
+            @endif
+    
+            @if($errors->any())
+                <div class="flex items-center justify-center">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li><x-warning-alert>{{ $error }}</x-warning-alert></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
 
         <form method="POST" action="{{ route('register.student.submit') }}" enctype="multipart/form-data">
             @csrf
@@ -45,10 +68,10 @@
 
             <!-- Profile Picture -->
             <div>
-                <x-input-label for="profilePicture" :value="__('Profile Picture')" />
-                <input id="profilePicture" type="file" class="block mt-1 w-full" name="profilePicture" accept="image/*"
-                    :value="old('profilePicture')" required />
-                <x-input-error :messages="$errors->get('profilePicture')" class="mt-2" />
+                <x-input-label for="profile_picture" :value="__('Profile Picture')" />
+                <input id="profile_picture" type="file" class="block mt-1 w-full" name="profile_picture" accept="image/*"
+                    :value="old('profile_picture')" required />
+                <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
             </div>
 
             <!-- Password -->

@@ -56,7 +56,7 @@ Route::middleware(['auth', 'lecturer', 'course.edit'])->group(function () {
     Route::delete('/delete/section/{slug}/{module_id}/{section_order}', [SectionController::class, 'delete'])
         ->name('section.delete');
 
-    Route::patch('/edit/{slug}/{module_id}/{section_id}', [SectionController::class, 'editModuleTitle'])
+    Route::patch('/edit/{slug}/{module_id}/{section_id}', [SectionController::class, 'editTitle'])
         ->name('section.edit');
 });
 

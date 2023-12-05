@@ -25,6 +25,11 @@ class ArticleController
 
     public function createArticle(Request $request)
     {
+        $request->validate([
+            'section_id' => 'required|integer',
+            'text' => 'required|string'
+        ]);
+
         $request = new CreateArticleRequest(
             $request['section_id'],
             $request['text'],
@@ -32,11 +37,16 @@ class ArticleController
 
         $this->create_article_service->execute($request);
 
-        return redirect()->back();
+        return redirect()->back()->with(['status' => 'success', 'message' => 'Article created successfully']);
     }
 
     public function editArticle(Request $request)
     {
+        $request->validate([
+            'section_id' => 'required|integer',
+            'text' => 'required|string'
+        ]);
+
         $request = new EditArticleRequest(
             $request['section_id'],
             $request['text'],
@@ -44,18 +54,22 @@ class ArticleController
 
         $this->edit_article_service->execute($request);
 
-        return redirect()->back();
+        return redirect()->back()->with(['status' => 'success', 'message' => 'Article edited successfully']);
     }
 
     public function deleteArticle(Request $request)
     {
+        $request->validate([
+            'section_id' => 'required|integer|exists:articles,section_id'
+        ]);
+
         $request = new DeleteArticleRequest(
             $request['section_id'],
         );
 
         $this->delete_article_service->execute($request);
 
-        return redirect()->back();
+        return redirect()->back()->with(['status' => 'success', 'message' => 'Article deleted successfully']);
     }
 
     public function getAllArticles()
