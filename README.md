@@ -13,7 +13,9 @@
 
 1. Tamu dapat mengakses halaman utama website.
 
-2. Tamu dapat melihat daftar kursus yang tersedia dan informasi umum tentang setiap kursus.
+ <img width="909" alt="image" src="https://github.com/katarinainezita/school-management-system/assets/109232320/15ef4e97-081b-453e-87be-daeed73348c9">
+
+3. Tamu dapat melihat daftar kursus yang tersedia dan informasi umum tentang setiap kursus.
 
 
 ### Pendaftaran Dosen (Lecturer)
