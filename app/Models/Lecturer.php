@@ -17,7 +17,8 @@ class Lecturer extends Model
         'name',
         'user_id',
         'phoneNumber',
-        'Description',
+        'description',
+        'dateOfBirth',
         'photo'
     ];
 

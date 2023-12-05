@@ -54,6 +54,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/reply/send", [DiscussionController::class, 'reply'])->name('reply.send');
 });
 
+foreach (scandir($path = app_path('Http/Module')) as $dir) {
+    if (file_exists($filepath = "{$path}/{$dir}/Presentation/web.php")) {
+        require $filepath;
+    }
+};
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/student.php';
 require __DIR__ . '/admin.php';

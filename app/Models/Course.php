@@ -57,7 +57,7 @@ class Course extends Model
 
     public function isStudent($id): bool
     {
-        return $this->students()->select('id')->find($id) != null;
+        return $this->students()->find($id) != null;
     }
 
     public function reviews(): HasMany

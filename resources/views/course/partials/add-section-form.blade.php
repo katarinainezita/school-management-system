@@ -24,7 +24,7 @@
                             <option selected></option>
                             <option value="Article">Article</option>
                             <option value="Video">Video</option>
-                            <option value="Test">Quiz</option>
+                            {{-- <option value="Test">Quiz</option> --}}
                         </x-select-input-form>
                     </div>
 

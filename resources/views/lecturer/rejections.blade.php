@@ -31,7 +31,7 @@
                                 @foreach ($course->rejections as $data)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">
-                                        {{ $data->course->title }}
+                                        <a href="{{ route('course.edit', ['slug' => $course->slug]) }}">{{ $data->course->title }}</a>
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $data->message }}
