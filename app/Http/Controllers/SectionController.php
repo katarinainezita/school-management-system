@@ -76,4 +76,17 @@ class SectionController extends Controller
 
         return redirect(route('course.edit', ['slug' => $slug]))->with(['status' => 'success', 'message' => 'Section has been deleted']);
     }
+
+    public function editTitle(Request $request, $slug, $module_id, $section_id)
+    {
+        $request->validate([
+            'title' => 'required|string'
+        ]);
+
+        $section = Section::find($section_id);
+        $section->title = $request->title;
+        $section->save();
+
+        return redirect(route('course.edit', ['slug' => $slug]))->with(['status' => 'success', 'message' => 'Section title has been edited']);
+    }
 }

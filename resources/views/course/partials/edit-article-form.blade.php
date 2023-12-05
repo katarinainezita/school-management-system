@@ -11,7 +11,7 @@
               @csrf
               @method('PATCH')
 
-              <input type="hidden" name="article_id" value="{{ $article->id }}">
+              <input type="hidden" name="section_id" value="{{ $id }}">
 
               <div class="p-5">
                   <div class="mb-6">

@@ -25,9 +25,7 @@ Route::post('/new', [CourseController::class, 'new'])
 Route::get('/{slug}', [CourseController::class, 'showDetailCourse'])
     ->name('course.detail');
 
-Route::post('/learn/add-article', [ArticleController::class, 'store'])->name('article.store');
 Route::post('/learn/add-video', [VideoControler::class, 'store'])->name('video.store');
-Route::patch('/learn/edit-article', [ArticleController::class, 'edit'])->name('article.edit');
 Route::patch('/learn/edit-video', [VideoControler::class, 'edit'])->name('video.edit');
 
 Route::middleware(['auth', 'lecturer', 'course.edit'])->group(function () {
@@ -58,7 +56,7 @@ Route::middleware(['auth', 'lecturer', 'course.edit'])->group(function () {
     Route::delete('/delete/section/{slug}/{module_id}/{section_order}', [SectionController::class, 'delete'])
         ->name('section.delete');
 
-    Route::patch('/edit/{slug}/{module_id}/{section_id}', [SectionController::class, 'editModuleTitle'])
+    Route::patch('/edit/{slug}/{module_id}/{section_id}', [SectionController::class, 'editTitle'])
         ->name('section.edit');
 });
 

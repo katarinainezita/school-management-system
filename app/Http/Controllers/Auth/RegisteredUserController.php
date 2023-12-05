@@ -10,8 +10,10 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -53,7 +55,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'class' => $request->class,
+            // 'class' => $request->class,
             'date_of_birth' => $request->date_of_birth,
             'role_type' => $request->type,
             'profile_picture' => $request->profile_picture,
@@ -79,5 +81,70 @@ class RegisteredUserController extends Controller
         }
 
         return redirect(($route));
+    }
+
+    public function storeStudent(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:300',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg',
+            'dateOfBirth' => 'required|date',
+            'phoneNumber' => 'required|string|max:20',
+            'email' => 'required|email',
+            'password' => ['required', Password::min(8)]
+        ]);
+
+
+        if ($request->hasFile('profile_picture')) {
+            $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            // $request->profile_picture - $imagePath;
+        }
+
+        $student = Student::create([
+            'name' => $request->name,
+            'photo' => $imagePath,
+            'dateOfBirth' => $request->dateOfBirth,
+            'phoneNumber' => '111',
+        ]);
+
+        $student->user()->create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect((route('login')));
+    }
+
+    public function storeLecturer(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:300',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg',
+            'dateOfBirth' => 'required|date',
+            'phoneNumber' => 'required|string|max:20',
+            'description' => 'required|string',
+            'email' => 'required|email',
+            'password' => ['required', Password::min(8)]
+        ]);
+
+        if ($request->hasFile('profile_picture')) {
+            $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            // $request->profile_picture - $imagePath;
+        }
+
+        $lecturer = Lecturer::create([
+            'name' => $request->name,
+            'phoneNumber' => $request->phoneNumber,
+            'description' => $request->description,
+            'dateOfBirth' => $request->dateOfBirth,
+            'photo' => $imagePath,
+        ]);
+
+        $lecturer->user()->create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect(route('login'));
     }
 }
