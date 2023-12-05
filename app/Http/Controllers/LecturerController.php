@@ -12,7 +12,7 @@ class LecturerController extends Controller
     {
         $numOfData = 10;
         $firstData = ($page - 1)*$numOfData;
-        $datas = Auth::user()->lecturer->courses()->where('draft', false)->where('verified', true)->get();
+        $datas = Auth::user()->role->courses()->where('draft', false)->where('verified', true)->get();
         $maxPage = ceil($datas->count() / $numOfData);
 
         // if exceeded page
@@ -29,7 +29,7 @@ class LecturerController extends Controller
     {
         $numOfData = 10;
         $firstData = ($page - 1)*$numOfData;
-        $datas = Auth::user()->lecturer->courses()->where('draft', true)->get();
+        $datas = Auth::user()->role->courses()->where('draft', true)->get();
         $maxPage = ceil($datas->count() / $numOfData);
 
         // if exceeded page
@@ -46,7 +46,7 @@ class LecturerController extends Controller
     {
         $numOfData = 10;
         $firstData = ($page - 1)*$numOfData;
-        $datas = Auth::user()->lecturer->courses()->where('draft', false)->where('verified', false)->get();
+        $datas = Auth::user()->role->courses()->where('draft', false)->where('verified', false)->get();
         $maxPage = ceil($datas->count() / $numOfData);
 
         // if exceeded page
@@ -71,7 +71,7 @@ class LecturerController extends Controller
     {
         $numOfData = 10;
         $firstData = ($page - 1)*$numOfData;
-        $datas = Auth::user()->lecturer->courses;
+        $datas = Auth::user()->role->courses;
         $maxPage = ceil($datas->count() / $numOfData);
 
         // if exceeded page

@@ -109,7 +109,7 @@ class CourseController extends Controller
 
     public function showEditCourse($slug): View
     {
-        $course = Auth::user()->lecturer->courses->where('slug', $slug)->first();
+        $course = Auth::user()->role->courses->where('slug', $slug)->first();
         $course->totalStudents = $course->students->count();
 
         $course->totalModules = $course->module;

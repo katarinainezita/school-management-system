@@ -5,7 +5,7 @@
     <div class="flex flex-col gap-4 my-6">
         @foreach ($discussion as $disc)
             <div class="bg-white shadow border-2 rounded-lg p-4">
-                <div class="text-blue-500 font-bold text-sm text-left">From : {{ $disc->user->name }}</div>
+                <div class="text-blue-500 font-bold text-sm text-left">From : {{ $disc->user->role->name }}</div>
                 <p class="text-lg font-bold">{{ $disc->comment }}</p>
                 <x-dropdown>
                     <x-slot name="trigger">
@@ -37,7 +37,7 @@
 
             @foreach ($disc->reply as $reply)
                 <div class="bg-white ml-12 p-4 shadow border-2 rounded-lg">
-                    <div class="text-blue-500 font-bold text-sm text-left">Reply from : {{ $reply->user->name }}</div>
+                    <div class="text-blue-500 font-bold text-sm text-left">Reply from : {{ $reply->user->role->name }}</div>
                     <p class="text-lg font-bold">{{ $reply->comment }}</p>
                 </div>
             @endforeach
