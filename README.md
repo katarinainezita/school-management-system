@@ -24,13 +24,23 @@
 
 1. Dosen dapat mendaftar sebagai pengajar pada website.
 
+<img width="960" alt="Screenshot 2023-12-05 103836" src="https://github.com/katarinainezita/school-management-system/assets/109232320/73e93bd1-ba50-4348-890c-3f9a1f1c5feb">
+
 2. Proses pendaftaran mencakup pengisian informasi dasar dan verifikasi oleh admin.
+
+<img width="960" alt="Screenshot 2023-12-05 112423" src="https://github.com/katarinainezita/school-management-system/assets/109232320/b092fbbe-0b39-400e-9276-7210cebdf25e">
+
 
 ### Pembuatan Kursus oleh Dosen (Lecturer)
 
 1. Dosen yang terdaftar dapat membuat kursus baru.
 
+<img width="960" alt="Screenshot 2023-12-05 112516" src="https://github.com/katarinainezita/school-management-system/assets/109232320/93a3c4e8-d471-4c30-979e-969eed7e363b">
+
 2. Dosen dapat menambahkan modul dan bagian ke dalam kursus.
+
+<img width="960" alt="Screenshot 2023-12-05 112633" src="https://github.com/katarinainezita/school-management-system/assets/109232320/7f97d21f-7483-428b-8de9-70ab51b21712">
+
 
 ### Pembuatan Modul dan Bagian oleh Dosen (Lecturer)
 
@@ -38,15 +48,26 @@
 
 2. Dosen dapat mengelompokkan modul ke dalam bagian yang sesuai.
 
+<img width="960" alt="Screenshot 2023-12-05 112750" src="https://github.com/katarinainezita/school-management-system/assets/109232320/64d70fe6-07ea-407f-be4d-1fff71994019">
+
+
 ### Pembuatan Artikel oleh Dosen (Lecturer)
 
 1. Dosen dapat membuat artikel yang terkait dengan kursus yang diajarkan.
 
+<img width="960" alt="Screenshot 2023-12-05 115039" src="https://github.com/katarinainezita/school-management-system/assets/109232320/1cffa8ef-8e4f-4e74-b79a-e505fb1f416e">
+
+
 2. Artikel dapat berisi materi tambahan, referensi, atau sumber daya pendukung lainnya.
+
+<img width="960" alt="Screenshot 2023-12-05 115208" src="https://github.com/katarinainezita/school-management-system/assets/109232320/44acb448-0cae-4586-9f37-63d457cbef4a">
+
 
 ### Pengajuan Kursus oleh Dosen (Lecturer)
 
 1. Setelah selesai, dosen dapat mengajukan kursus untuk ditinjau oleh admin.
+
+<img width="875" alt="Screenshot 2023-12-05 115346" src="https://github.com/katarinainezita/school-management-system/assets/109232320/92a7b4ae-722f-47da-b848-267969c5e3ca">
 
 ### Penolakan Kursus oleh Admin
 
