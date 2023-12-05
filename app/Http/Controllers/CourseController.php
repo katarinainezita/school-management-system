@@ -27,7 +27,7 @@ class CourseController extends Controller
         $unverifiedCourse->save();
 
         // send email to lecturer
-        $data['email'] = 'thoriq.afif.habibi@gmail.com';
+        $data['email'] = $unverifiedCourse->lecturer->user->email;
         dispatch(new SendEmailJob($data));
 
         return redirect(route('admin.proposal.courses', ['page' => 1]))->with(['status' => 'success', 'message' => 'Course has been verified']);
