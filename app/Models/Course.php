@@ -31,6 +31,7 @@ class Course extends Model
         'lecturer',
     ];
 
+    // for search with filter 
     public static function searchWithFilter($query, $category, $level)
     {
         return self::where(function ($queryBuilder) use ($query) {

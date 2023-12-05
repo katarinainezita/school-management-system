@@ -13,8 +13,11 @@ use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
+    
+    // Untuk menampilkan card course di dashboard
     public function index(Request $request)
     {
+        // Search & Filter from url
         $query = $request->input('query');
 
         $category = $request->input('category');
@@ -23,7 +26,7 @@ class StudentController extends Controller
 
         $courses = Course::searchWithFilter($query, $category, $level);
 
-        $cartItems = Cart::where('student_id', Auth::user()->role->id)->first('data');
+        $cartItems = Cart::where('student_id', Auth::user()->student->id)->first('data');
 
         $cartItemsArray = json_decode($cartItems, true);
 
@@ -36,7 +39,7 @@ class StudentController extends Controller
         $category = $request->input('category');
         $level = $request->input('level');
 
-        $courseStudent = CourseStudent::where('student_id', Auth::user()->role->id)->get();
+        $courseStudent = CourseStudent::where('student_id', Auth::user()->student->id)->get();
         $courses = [];
 
         foreach ($courseStudent as $course) {
